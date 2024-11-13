@@ -65,7 +65,6 @@ nav:
     - Eigenvalue/README.md
     - Introduction: Eigenvalue/Introduction.md
     - QR Factorization: Eigenvalue/QR_Factorization.md
-    - Classical Eigenvalue Algorithms: Eigenvalue/Classical_Eigenvalue_Algorithms.md
     - QR Algorithm: Eigenvalue/QR_Algorithm.md
     - Divide and Conquer: Eigenvalue/Divide_and_Conquer.md
     - SVD: Eigenvalue/SVD.md

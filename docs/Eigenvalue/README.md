@@ -4,9 +4,7 @@
 
 [QR Factorization](./QR_Factorization.md)
 
-[Classical Eigenvalue Algorithms](./Classical_Eigenvalue_Algorithms.md)
-
-[QR Algorithm](./QR_Algorithm.md)
+[QR Algorithm]()
 
 [Divide and Conquer](./Divide_and_Conquer.md)
 
@@ -29,7 +27,7 @@ $$
 $$
 
 $$
-\vdots 
+\vdots
 $$
 
 $$
@@ -47,7 +45,7 @@ The process from $\boldsymbol{\alpha }_1,\boldsymbol{\alpha }_2,\cdots ,\boldsym
 $$
 \boldsymbol{A}=\left[ \begin{matrix}
 	\boldsymbol{\alpha }_1&		\boldsymbol{\alpha }_2&		\cdots&		\boldsymbol{\alpha }_k\\
-\end{matrix} \right] 
+\end{matrix} \right]
 $$
 
 $$
@@ -58,5 +56,5 @@ $$
 	0&		\left\| \boldsymbol{\beta }_2 \right\|&		\cdots&		\left( \boldsymbol{\alpha }_k,\boldsymbol{\gamma }_2 \right)\\
 	\vdots&		\ddots&		\ddots&		\vdots\\
 	0&		\cdots&		0&		\left\| \boldsymbol{\beta }_k \right\|\\
-\end{matrix} \right] 
+\end{matrix} \right]
 $$
