@@ -61,13 +61,6 @@ copyright: Copyright &copy; 2024 Ajeet Kumar
 
 nav:
   - Home: index.md
-  - Eigenvalue Problem:
-    - Eigenvalue/README.md
-    - Introduction: Eigenvalue/Introduction.md
-    - QR Factorization: Eigenvalue/QR_Factorization.md
-    - QR Algorithm: Eigenvalue/QR_Algorithm.md
-    - Divide and Conquer: Eigenvalue/Divide_and_Conquer.md
-    - SVD: Eigenvalue/SVD.md
   - Definition:
     - def/Eigenvalue_and_Eigenvector.md
     - def/Linear_Transformations.md
