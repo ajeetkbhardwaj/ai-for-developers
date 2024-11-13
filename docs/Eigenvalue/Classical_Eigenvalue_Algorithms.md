@@ -14,7 +14,7 @@ $$
 	\times&		\times&		\times&		\times\\
 	\times&		\times&		\times&		\times\\
 	\times&		\times&		\times&		\times\\
-\end{matrix} \right] \xrightarrow{{\boldsymbol{Q}_1}^*\left( \mathrm{left} \right)}\left[ \begin{matrix}
+\end{matrix} \right] \xrightarrow{{ \boldsymbol{Q}_1}^{*\left( \mathrm{left} \right)}} \left[ \begin{matrix}
 	\times&		\times&		\times&		\times\\
 	\times&		\times&		\times&		\times\\
 	0&		\times&		\times&		\times\\
