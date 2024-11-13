@@ -17,3 +17,5 @@ $p_A(\lambda)=\det (\lambda I_n - A)$
  of a square matrix, A. solving characteristic polynomial gives eigen values of matrix A as a roots of it and matrix polynomial of matrix A  vanishes i.e p(A) = 0 by Cayley-Hamilton Theorem. Faddeev-Le Verrier algorithm works directly with coefficients of matrix $A$.
 
 Problem : Given a 
+
+
