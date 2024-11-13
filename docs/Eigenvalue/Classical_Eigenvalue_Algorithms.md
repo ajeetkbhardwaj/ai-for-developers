@@ -8,39 +8,6 @@ Eigenvalue problem phase 1: $\boldsymbol{A}\rightarrow \boldsymbol{H}\,\,\left( 
 
 For example, let $\boldsymbol{A}\in \mathbb{R} ^{n\times n}$, the steps for phase 1 can be shown as:
 
-$$
-\boldsymbol{A}=\left[ \begin{matrix}
-	\times&		\times&		\times&		\times\\
-	\times&		\times&		\times&		\times\\
-	\times&		\times&		\times&		\times\\
-	\times&		\times&		\times&		\times\\
-\end{matrix} \right] \xrightarrow{{ \boldsymbol{Q}_1}^{*\left( \mathrm{left} \right)}} \left[ \begin{matrix}
-	\times&		\times&		\times&		\times\\
-	\times&		\times&		\times&		\times\\
-	0&		\times&		\times&		\times\\
-	0&		\times&		\times&		\times\\
-\end{matrix} \right] \xrightarrow[\boldsymbol{Q}_1\left( \mathrm{right} \right)]{}\left[ \begin{matrix}
-	\times&		\times&		\times&		\times\\
-	\times&		\times&		\times&		\times\\
-	0&		\times&		\times&		\times\\
-	0&		\times&		\times&		\times\\
-\end{matrix} \right] 
-$$
-
-$$
-\xrightarrow{{\boldsymbol{Q}_2}^*\left( \mathrm{left} \right)}\left[ \begin{matrix}
-	\times&		\times&		\times&		\times\\
-	\times&		\times&		\times&		\times\\
-	0&		\times&		\times&		\times\\
-	0&		0&		\times&		\times\\
-\end{matrix} \right] \xrightarrow[\boldsymbol{Q}_2\left( \mathrm{right} \right)]{}\left[ \begin{matrix}
-	\times&		\times&		\times&		\times\\
-	\times&		\times&		\times&		\times\\
-	0&		\times&		\times&		\times\\
-	0&		0&		\times&		\times\\
-\end{matrix} \right] =\boldsymbol{H}
-$$
-
 ### Householder Reduction
 
 Algorithm (**Householder Reduction** to upper Hessenberg form):

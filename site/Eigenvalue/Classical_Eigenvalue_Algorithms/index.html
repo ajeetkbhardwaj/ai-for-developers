@@ -892,37 +892,6 @@
 <h3 id="general-steps-for-phase-one">General Steps for Phase One<a class="headerlink" href="#general-steps-for-phase-one" title="Permanent link">⚓︎</a></h3>
 <p>Eigenvalue problem phase 1: <span class="arithmatex">\(\boldsymbol{A}\rightarrow \boldsymbol{H}\,\,\left( \boldsymbol{A}\sim \boldsymbol{H} \right)\)</span>, <span class="arithmatex">\(\boldsymbol{H}\)</span> is a upper Hessenberg matrix. We get <span class="arithmatex">\(\boldsymbol{A}=\boldsymbol{XHX}^{-1}\)</span>.</p>
 <p>For example, let <span class="arithmatex">\(\boldsymbol{A}\in \mathbb{R} ^{n\times n}\)</span>, the steps for phase 1 can be shown as:</p>
-<div class="arithmatex">\[
-\boldsymbol{A}=\left[ \begin{matrix}
-    \times&amp;     \times&amp;     \times&amp;     \times\\
-    \times&amp;     \times&amp;     \times&amp;     \times\\
-    \times&amp;     \times&amp;     \times&amp;     \times\\
-    \times&amp;     \times&amp;     \times&amp;     \times\\
-\end{matrix} \right] \xrightarrow{{ \boldsymbol{Q}_1}^{*\left( \mathrm{left} \right)}} \left[ \begin{matrix}
-    \times&amp;     \times&amp;     \times&amp;     \times\\
-    \times&amp;     \times&amp;     \times&amp;     \times\\
-    0&amp;      \times&amp;     \times&amp;     \times\\
-    0&amp;      \times&amp;     \times&amp;     \times\\
-\end{matrix} \right] \xrightarrow[\boldsymbol{Q}_1\left( \mathrm{right} \right)]{}\left[ \begin{matrix}
-    \times&amp;     \times&amp;     \times&amp;     \times\\
-    \times&amp;     \times&amp;     \times&amp;     \times\\
-    0&amp;      \times&amp;     \times&amp;     \times\\
-    0&amp;      \times&amp;     \times&amp;     \times\\
-\end{matrix} \right] 
-\]</div>
-<div class="arithmatex">\[
-\xrightarrow{{\boldsymbol{Q}_2}^*\left( \mathrm{left} \right)}\left[ \begin{matrix}
-    \times&amp;     \times&amp;     \times&amp;     \times\\
-    \times&amp;     \times&amp;     \times&amp;     \times\\
-    0&amp;      \times&amp;     \times&amp;     \times\\
-    0&amp;      0&amp;      \times&amp;     \times\\
-\end{matrix} \right] \xrightarrow[\boldsymbol{Q}_2\left( \mathrm{right} \right)]{}\left[ \begin{matrix}
-    \times&amp;     \times&amp;     \times&amp;     \times\\
-    \times&amp;     \times&amp;     \times&amp;     \times\\
-    0&amp;      \times&amp;     \times&amp;     \times\\
-    0&amp;      0&amp;      \times&amp;     \times\\
-\end{matrix} \right] =\boldsymbol{H}
-\]</div>
 <h3 id="householder-reduction">Householder Reduction<a class="headerlink" href="#householder-reduction" title="Permanent link">⚓︎</a></h3>
 <p>Algorithm (<strong>Householder Reduction</strong> to upper Hessenberg form):</p>
 <p>For <span class="arithmatex">\(k=1:m-2\)</span>:</p>
