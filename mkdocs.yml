@@ -64,5 +64,6 @@ nav:
   - Definition:
     - def/Eigenvalue_and_Eigenvector.md
     - def/Linear_Transformations.md
+    - def/MatrixComputation.md
   - Program:
     - pdsa/prosandcons.md

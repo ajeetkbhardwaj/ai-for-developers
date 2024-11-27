@@ -1,0 +1,2812 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Linear_Transformations/">
+      
+      
+        <link rel="next" href="../../pdsa/prosandcons/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.jpg">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>Matrix Computation - Lab for Applied-Mathematics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Libre Baskerville";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#matrix-computation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lab for Applied-Mathematics" class="md-header__button md-logo" aria-label="Lab for Applied-Mathematics" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14.27 10.64 13A11.242 11.242 0 0 0 5 10.18v6.95c2.61.34 5 1.34 7 2.82 2-1.48 4.39-2.48 7-2.82v-6.95c-2.16.39-4.09 1.39-5.64 2.82M19 8.15c.65-.1 1.32-.15 2-.15v11c-3.5 0-6.64 1.35-9 3.54C9.64 20.35 6.5 19 3 19V8c.68 0 1.35.05 2 .15 2.69.41 5.1 1.63 7 3.39 1.9-1.76 4.31-2.98 7-3.39M12 6c.27 0 .5-.1.71-.29.19-.21.29-.44.29-.71s-.1-.5-.29-.71C12.5 4.11 12.27 4 12 4s-.5.11-.71.29c-.18.21-.29.45-.29.71s.11.5.29.71c.21.19.45.29.71.29m2.12 1.12a2.997 2.997 0 1 1-4.24-4.24 2.997 2.997 0 1 1 4.24 4.24Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lab for Applied-Mathematics
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Matrix Computation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ajeetkbhardwaj/Lab-for-Applied-Mathematics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ajeet Kumar
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Eigenvalue_and_Eigenvector/" class="md-tabs__link">
+          
+  
+    
+  
+  Definition
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../pdsa/prosandcons/" class="md-tabs__link">
+          
+  
+    
+  
+  Program
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lab for Applied-Mathematics" class="md-nav__button md-logo" aria-label="Lab for Applied-Mathematics" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14.27 10.64 13A11.242 11.242 0 0 0 5 10.18v6.95c2.61.34 5 1.34 7 2.82 2-1.48 4.39-2.48 7-2.82v-6.95c-2.16.39-4.09 1.39-5.64 2.82M19 8.15c.65-.1 1.32-.15 2-.15v11c-3.5 0-6.64 1.35-9 3.54C9.64 20.35 6.5 19 3 19V8c.68 0 1.35.05 2 .15 2.69.41 5.1 1.63 7 3.39 1.9-1.76 4.31-2.98 7-3.39M12 6c.27 0 .5-.1.71-.29.19-.21.29-.44.29-.71s-.1-.5-.29-.71C12.5 4.11 12.27 4 12 4s-.5.11-.71.29c-.18.21-.29.45-.29.71s.11.5.29.71c.21.19.45.29.71.29m2.12 1.12a2.997 2.997 0 1 1-4.24-4.24 2.997 2.997 0 1 1 4.24 4.24Z"/></svg>
+
+    </a>
+    Lab for Applied-Mathematics
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ajeetkbhardwaj/Lab-for-Applied-Mathematics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ajeet Kumar
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Definition
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Definition
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Eigenvalue_and_Eigenvector/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Eigen Value and Vecotr
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Linear_Transformations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linear Transformations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Matrix Computation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Matrix Computation
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#conditioning-and-condition-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conditioning and Condition Numbers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conditioning-and-condition-numbers_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conditioning and Condition Numbers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conditioning and Condition Numbers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#condition-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      Condition Number:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importance-of-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importance of Conditioning:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-facts-about-conditioning-and-condition-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Facts About Conditioning and Condition Numbers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Facts About Conditioning and Condition Numbers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-impact-of-finite-precision-and-rounding-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Impact of Finite Precision and Rounding Errors:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-relative-condition-number-and-error-bounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Relative Condition Number and Error Bounds:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-condition-number-via-frechet-derivatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Condition Number via Fréchet Derivatives:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-subtractive-cancellation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Subtractive Cancellation:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-conditioning-of-matrixvector-multiplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Conditioning of Matrix–Vector Multiplication:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-wilkinson-polynomial" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Wilkinson Polynomial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Insights:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#numerical-stability-and-instability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Numerical Stability and Instability
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Definitions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forward Error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Error
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-numerical-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Numerical Stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Numerical Stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forward Stability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Stability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strong-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strong Stability:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-practical-implications" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Practical Implications
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Examples
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-error-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Error Size
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weak-numerical-stability-vs-numerical-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weak Numerical Stability vs Numerical Stability
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-weak-numerical-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Weak Numerical Stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Weak Numerical Stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Characteristics:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implications:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-numerical-stability_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Numerical Stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Numerical Stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-characteristics_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Characteristics:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-comparisons" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Comparisons
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-visualization-figure-372" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Visualization (Figure 37.2)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-facts-about-numerical-stability-and-backward-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Facts about Numerical Stability and Backward Stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Facts about Numerical Stability and Backward Stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-numerical-stability-and-ill-conditioned-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Numerical Stability and Ill-Conditioned Problems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-backward-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Backward Stability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-forward-error-in-backward-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Forward Error in Backward Stability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-examples-of-backward-stable-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Examples of Backward Stable Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-implications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Practical Implications
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procedures-to-compute-stability-and-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procedures to Compute Stability and Conditioning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-compute-problem-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Compute Problem Conditioning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Compute Problem Conditioning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps-to-compute-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to Compute Conditioning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-polynomial-root-finding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Polynomial Root Finding
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-assess-algorithm-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Assess Algorithm Stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Assess Algorithm Stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps-to-compute-algorithm-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to Compute Algorithm Stability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-naive-dot-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Naive Dot Product
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-numerical-conditioning-of-matrix-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Numerical Conditioning of Matrix Algorithms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Numerical Conditioning of Matrix Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matrix-multiplication-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Matrix Multiplication Conditioning:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-gaussian-elimination" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Gaussian Elimination
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-numerical-stability-in-least-squares-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Numerical Stability in Least Squares Problems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Numerical Stability in Least Squares Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Method:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-qr-factorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: QR Factorization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-eigenvalue-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Eigenvalue Problems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Eigenvalue Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Method:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-wilkinson-polynomial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Wilkinson Polynomial
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples-of-numerical-stability-and-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples of Numerical Stability and Conditioning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-forward-stable-but-not-backward-stable-outer-product-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Forward Stable but Not Backward Stable: Outer Product Algorithm
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-backward-vs-forward-errors-taylor-series-approximation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Backward vs. Forward Errors: Taylor Series Approximation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-numerically-unstable-algorithm-logarithm-near-zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Numerically Unstable Algorithm: Logarithm Near Zero
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-improved-logarithm-algorithm-taylor-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Improved Logarithm Algorithm: Taylor Series
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-gaussian-elimination-without-pivoting" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Gaussian Elimination Without Pivoting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-unstable-algorithm-for-eigenvalue-computations" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Unstable Algorithm for Eigenvalue Computations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-alternative-eigenvalue-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Alternative Eigenvalue Algorithms
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Program
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Program
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pdsa/prosandcons/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    From Applications to Advantages and Disadvantages
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#conditioning-and-condition-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conditioning and Condition Numbers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conditioning-and-condition-numbers_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conditioning and Condition Numbers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conditioning and Condition Numbers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#condition-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      Condition Number:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importance-of-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importance of Conditioning:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-facts-about-conditioning-and-condition-numbers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Facts About Conditioning and Condition Numbers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Facts About Conditioning and Condition Numbers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-impact-of-finite-precision-and-rounding-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Impact of Finite Precision and Rounding Errors:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-relative-condition-number-and-error-bounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Relative Condition Number and Error Bounds:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-condition-number-via-frechet-derivatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Condition Number via Fréchet Derivatives:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-subtractive-cancellation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Subtractive Cancellation:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-conditioning-of-matrixvector-multiplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Conditioning of Matrix–Vector Multiplication:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-wilkinson-polynomial" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Wilkinson Polynomial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#insights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Insights:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#numerical-stability-and-instability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Numerical Stability and Instability
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Definitions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forward Error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Error
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-numerical-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Numerical Stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Numerical Stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forward Stability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Stability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strong-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strong Stability:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-practical-implications" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Practical Implications
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Examples
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-error-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Error Size
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weak-numerical-stability-vs-numerical-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weak Numerical Stability vs Numerical Stability
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-weak-numerical-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Weak Numerical Stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Weak Numerical Stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Characteristics:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implications:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-numerical-stability_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Numerical Stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Numerical Stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-characteristics_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Characteristics:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-comparisons" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Comparisons
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-visualization-figure-372" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Visualization (Figure 37.2)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-facts-about-numerical-stability-and-backward-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Facts about Numerical Stability and Backward Stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Facts about Numerical Stability and Backward Stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-numerical-stability-and-ill-conditioned-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Numerical Stability and Ill-Conditioned Problems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-backward-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Backward Stability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-forward-error-in-backward-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Forward Error in Backward Stability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-examples-of-backward-stable-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Examples of Backward Stable Algorithms
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-implications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Practical Implications
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procedures-to-compute-stability-and-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Procedures to Compute Stability and Conditioning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-compute-problem-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Compute Problem Conditioning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Compute Problem Conditioning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps-to-compute-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to Compute Conditioning
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-polynomial-root-finding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Polynomial Root Finding
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-assess-algorithm-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Assess Algorithm Stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Assess Algorithm Stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definition:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps-to-compute-algorithm-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to Compute Algorithm Stability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-naive-dot-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Naive Dot Product
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-numerical-conditioning-of-matrix-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Numerical Conditioning of Matrix Algorithms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Numerical Conditioning of Matrix Algorithms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matrix-multiplication-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Matrix Multiplication Conditioning:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-gaussian-elimination" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Gaussian Elimination
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-numerical-stability-in-least-squares-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Numerical Stability in Least Squares Problems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Numerical Stability in Least Squares Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Method:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-qr-factorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: QR Factorization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-eigenvalue-problems" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Eigenvalue Problems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Eigenvalue Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Method:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-wilkinson-polynomial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: Wilkinson Polynomial
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples-of-numerical-stability-and-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples of Numerical Stability and Conditioning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-forward-stable-but-not-backward-stable-outer-product-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Forward Stable but Not Backward Stable: Outer Product Algorithm
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-backward-vs-forward-errors-taylor-series-approximation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Backward vs. Forward Errors: Taylor Series Approximation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-numerically-unstable-algorithm-logarithm-near-zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Numerically Unstable Algorithm: Logarithm Near Zero
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-improved-logarithm-algorithm-taylor-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Improved Logarithm Algorithm: Taylor Series
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-gaussian-elimination-without-pivoting" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Gaussian Elimination Without Pivoting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-unstable-algorithm-for-eigenvalue-computations" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Unstable Algorithm for Eigenvalue Computations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-alternative-eigenvalue-algorithms" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Alternative Eigenvalue Algorithms
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="matrix-computation">Matrix Computation<a class="headerlink" href="#matrix-computation" title="Permanent link">⚓︎</a></h1>
+<p>Understanding Errors in Numerical Computation</p>
+<p>Errors in numerical computation arise from various sources, such as modeling inaccuracies, measurement noise, manufacturing imperfections, and limitations in computational precision. These errors are compounded when data must be represented in finite precision formats like floating-point arithmetic, which introduces rounding errors. Additional errors may emerge from truncating infinite mathematical processes into finite iterative computations. These challenges are particularly relevant in matrix computations, where the sensitivity of algorithms to errors depends on factors like vector and matrix norms, floating-point representation standards, condition numbers, and numerical stability. Norms quantify the size of vectors and matrices, providing a way to express error bounds, while condition numbers measure how much small changes in input can affect computational results. Numerical stability ensures that rounding errors introduced during computation do not grow excessively, safeguarding the reliability of results even under finite precision constraints.</p>
+<p>Ensuring Reliable Computations Through Standards and Methods
+Floating-point arithmetic, as standardized by IEEE (e.g., IEEE 754 and IEEE 854), defines how real numbers are approximated and manipulated in computer systems. These standards provide a framework for understanding how rounding errors arise and propagate during computations. Tools like norms, condition numbers, and perturbation analysis are used to analyze and mitigate these errors. For example, a matrix's condition number determines whether the problem it represents is well-posed or ill-posed, influencing the choice of algorithm. Stable algorithms, which minimize the amplification of rounding errors, are critical in ensuring accurate results even for large or sensitive problems. Iterative methods like the power method, inverse iteration, and orthogonal iteration play significant roles in computing eigenvalues and eigenvectors, balancing accuracy, stability, and computational efficiency. When coupled with robust theoretical frameworks, such as those outlined in seminal works by Wilkinson, Higham, and others, these tools enable effective handling of errors in numerical computations, ensuring precision in both real and complex vector spaces.</p>
+<h3 id="conditioning-and-condition-numbers">Conditioning and Condition Numbers<a class="headerlink" href="#conditioning-and-condition-numbers" title="Permanent link">⚓︎</a></h3>
+<p>Errors are inevitable in real-world data due to measurement imprecision, equipment degradation, manufacturing tolerances, and limitations of floating-point arithmetic. These errors propagate through calculations, influencing the precision of computational results. The field of conditioning studies how errors in input data affect the results of computations.</p>
+<h3 id="conditioning-and-condition-numbers_1">Conditioning and Condition Numbers<a class="headerlink" href="#conditioning-and-condition-numbers_1" title="Permanent link">⚓︎</a></h3>
+<p>Errors are inevitable in real-world data due to measurement imprecision, equipment degradation, manufacturing tolerances, and limitations of floating-point arithmetic. These errors propagate through calculations, influencing the precision of computational results. The field of <em>conditioning</em> studies how errors in input data affect the results of computations. Below is a summary of the key concepts:</p>
+<ol>
+<li>
+<p><strong>Computational Problem:</strong><br />
+   A computational problem involves evaluating a function <span class="arithmatex">\(P: \mathbb{R}^n \to \mathbb{R}^m\)</span> at a given data point <span class="arithmatex">\(z \in \mathbb{R}^n\)</span>. In practice, <span class="arithmatex">\(z\)</span> is often approximated due to errors, represented as <span class="arithmatex">\(\hat{z} \in \mathbb{R}^n\)</span>.</p>
+</li>
+<li>
+<p><strong>Error Measures:</strong>  </p>
+</li>
+<li><strong>Absolute Error:</strong><br />
+     $
+     \text{Absolute error} = |z - \hat{z}|.
+     $</li>
+<li>
+<p><strong>Relative Error:</strong><br />
+     $
+     \text{Relative error} = \frac{|z - \hat{z}|}{|z|}, \quad z \neq 0.
+     $
+     If <span class="arithmatex">\(z = 0\)</span>, the relative error is undefined.</p>
+</li>
+<li>
+<p><strong>Conditioning of Data:</strong>  </p>
+</li>
+<li><strong>Well-Conditioned Data:</strong><br />
+     Small relative perturbations in $ z $ lead to small relative perturbations in $ P(z) $.</li>
+<li><strong>Ill-Conditioned Data:</strong><br />
+     Even small relative perturbations in $ z $ may cause large relative perturbations in $ P(z) $.<br />
+   The distinction depends on the context and precision required for the task.</li>
+</ol>
+<hr />
+<h4 id="condition-number">Condition Number:<a class="headerlink" href="#condition-number" title="Permanent link">⚓︎</a></h4>
+<p>To quantify the sensitivity of a problem to input perturbations, the <em>condition number</em> is defined.</p>
+<ol>
+<li>
+<p><strong>Relative Condition Number:</strong><br />
+   For $z \in \mathbb{R}^n $ and $ P(z) \neq 0 $, the relative condition number is given by:
+   $$
+   \text{cond}<em>P(z) = \lim</em>{\epsilon \to 0} \sup \frac{|P(z + \delta z) - P(z)| / |P(z)|}{|\delta z| / |z|}, \quad |\delta z| \leq \epsilon.
+   $$
+   This measures the largest possible relative change in $ P(z) $ resulting from small relative changes in $ z $.</p>
+</li>
+<li>
+<p><strong>Extension for $ z = 0 $ or Isolated Roots:</strong><br />
+   When $ z = 0 $ or $ z $ is an isolated root of $ P(z) $, the condition number can be generalized as:
+   $$
+   \text{cond}<em>P(z) = \limsup</em>{x \to z} \text{cond}_P(x).
+   $$</p>
+</li>
+<li>
+<p><strong>Key Notes:</strong>  </p>
+</li>
+<li>The condition number depends on the function $ P $, the input data $ z $, and the norm used in the computation.</li>
+<li>It characterizes the sensitivity of $ z $, not $ P(z) $, and not the algorithm used to compute $ P(z) $.</li>
+</ol>
+<hr />
+<h4 id="importance-of-conditioning">Importance of Conditioning:<a class="headerlink" href="#importance-of-conditioning" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li>Well-conditioned data ensures reliable computational results with limited precision.</li>
+<li>Ill-conditioned data may lead to significant errors or instability in computations, requiring additional measures such as robust algorithms or improved precision in inputs.</li>
+</ul>
+<h3 id="key-facts-about-conditioning-and-condition-numbers">Key Facts About Conditioning and Condition Numbers<a class="headerlink" href="#key-facts-about-conditioning-and-condition-numbers" title="Permanent link">⚓︎</a></h3>
+<h4 id="1-impact-of-finite-precision-and-rounding-errors">1. Impact of Finite Precision and Rounding Errors:<a class="headerlink" href="#1-impact-of-finite-precision-and-rounding-errors" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li><strong>Ubiquity of Rounding Errors:</strong><br />
+  In any finite precision computation, the best achievable result is $ P(z + \delta z) $, where $ |\delta z| \leq \epsilon |z| $, and $ \epsilon $ is a small multiple of the machine's floating-point unit round-off.<br />
+  (Refer to Section 37.6 for more details.)</li>
+</ul>
+<hr />
+<h4 id="2-relative-condition-number-and-error-bounds">2. Relative Condition Number and Error Bounds:<a class="headerlink" href="#2-relative-condition-number-and-error-bounds" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li><strong>Asymptotic Relative Error Bound:</strong><br />
+  The relative condition number provides an asymptotic bound for the relative error:<br />
+  $$
+  \frac{|P(z + \delta z) - P(z)|}{|P(z)|} \leq \text{cond}_P(z) \frac{|\delta z|}{|z|} + o\left(\frac{|\delta z|}{|z|}\right),
+  $$<br />
+  as $ |\delta z| \to 0 $.  </li>
+<li><strong>Significant Digits and Condition Number:</strong><br />
+  If the condition number satisfies $ \text{cond}_P(z) \approx 10^s $, then roughly $ s $ significant digits are lost in the computed result $ P(z) $. For example, if the input data $ z $ has $ p $ correct digits, the result $ P(z) $ retains approximately $ p - s $ correct digits.</li>
+</ul>
+<hr />
+<h4 id="3-condition-number-via-frechet-derivatives">3. Condition Number via Fréchet Derivatives:<a class="headerlink" href="#3-condition-number-via-frechet-derivatives" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li><strong>Definition via Derivatives:</strong><br />
+  For $ P $ having a Fréchet derivative $ D(z) $ at $ z \in \mathbb{F}^n $, the relative condition number is:<br />
+  $$
+  \text{cond}_P(z) = \frac{|D(z)| \cdot |z|}{|P(z)|}.
+  $$</li>
+<li><strong>Condition Number for Scalar Functions:</strong><br />
+  If $ f(x) $ is a smooth real function of a real variable $ x $, the condition number simplifies to:<br />
+  $$
+  \text{cond}_f(z) = \left| \frac{z f'(z)}{f(z)} \right|.
+  $$<br />
+  This measures the sensitivity of $ f(z) $ to small perturbations in $ z $.</li>
+</ul>
+<p>### Example of Conditioning for $ P(x) = \sin(x) $</p>
+<ol>
+<li><strong>Error Amplification in $ \sin(z) $:</strong><br />
+   Given $ z = \frac{22}{7} $, the data point has an uncertainty of approximately $ \pi - \frac{22}{7} \approx 0.00126 $.<br />
+   Since $ \sin(x) $ is a periodic function with high sensitivity near certain values (e.g., multiples of $ \pi $), the relative error in $ \sin(z) $ can be significant.<br />
+   Specifically, for $ z = \frac{22}{7} $, the relative error in $ \sin(z) $ can reach <strong>100%</strong>, making $ z $ highly <strong>ill-conditioned</strong> with respect to $ \sin(z) $. </li>
+</ol>
+<hr />
+<ol>
+<li><strong>Condition Number for $ \sin(x) $:</strong><br />
+   The condition number of $ z $ with respect to $ \sin(z) $ is given by:
+   $$
+   \text{cond}<em>{\sin}(z) = |z \cot(z)|.
+   $$
+   For $ z = \frac{22}{7} $, we calculate:
+   $$
+   \text{cond}</em>{\sin}(22/7) \approx 2485.47.
+   $$</li>
+</ol>
+<hr />
+<ol>
+<li><strong>Relative Error Bound for Perturbation:</strong><br />
+   If $ z $ is perturbed to $ z + \delta z = \pi $, the asymptotic relative error bound from <strong>Fact 2</strong> is:
+   $$
+   \frac{\sin(z + \delta z) - \sin(z)}{\sin(z)} \leq \text{cond}_{\sin}(z) \frac{\delta z}{z} + o\left(\frac{\delta z}{z}\right).
+   $$
+   Substituting the values:
+   $$
+   \frac{\sin(z + \delta z) - \sin(z)}{\sin(z)} = 1.
+   $$
+   This shows the actual relative error reaches its theoretical upper bound, confirming the ill-conditioned nature of $ z = \frac{22}{7} $ with respect to $ \sin(z) $.</li>
+</ol>
+<p>### Conditioning Examples in Numerical Computation</p>
+<hr />
+<h4 id="2-subtractive-cancellation">2. <strong>Subtractive Cancellation:</strong><a class="headerlink" href="#2-subtractive-cancellation" title="Permanent link">⚓︎</a></h4>
+<p>For $ x \in \mathbb{R}^2 $, define the computational problem:<br />
+$$
+P(x) = [1, -1]x = x_1 - x_2.
+$$</p>
+<ul>
+<li>
+<p><strong>Gradient of $ P(x) $:</strong><br />
+  The gradient is constant and independent of $ x $:
+  $$
+  \nabla P(x) = [1, -1].
+  $$</p>
+</li>
+<li>
+<p><strong>Condition Number:</strong><br />
+  Using the $ \infty $-norm and applying <strong>Fact 3</strong>, the condition number is:
+  $$
+  \text{cond}<em>{P}(x) = \frac{|\nabla P(x)|</em>\infty |x|<em>\infty}{|P(x)|}.
+  $$
+  Substituting the expressions:
+  $$
+  \text{cond}</em>{P}(x) = \frac{2 \max(|x_1|, |x_2|)}{|x_1 - x_2|}.
+  $$</p>
+</li>
+<li>
+<p><strong>Analysis:</strong><br />
+  This condition number becomes large when $ x_1 \approx x_2 $, indicating <strong>ill-conditioning</strong>.<br />
+  This reflects the challenge of <strong>subtractive cancellation</strong>, where small differences between nearly equal values $ x_1 $ and $ x_2 $ can lead to significant relative errors in $ P(x) $.</p>
+</li>
+</ul>
+<hr />
+<h4 id="3-conditioning-of-matrixvector-multiplication">3. <strong>Conditioning of Matrix–Vector Multiplication:</strong><a class="headerlink" href="#3-conditioning-of-matrixvector-multiplication" title="Permanent link">⚓︎</a></h4>
+<p>For a fixed matrix $ A \in \mathbb{F}^{m \times n} $, define the computational problem:<br />
+$$
+P(x) = Ax, \quad \text{where } x \in \mathbb{F}^n.
+$$</p>
+<ul>
+<li>
+<p><strong>Relative Condition Number:</strong><br />
+  The condition number of $ x $ with respect to $ P(x) $ is:
+  $$
+  \text{cond}(x) = \frac{|A| |x|}{|Ax|},
+  $$
+  where the matrix norm $ |A| $ is the <strong>operator norm</strong> induced by the chosen vector norm $ |\cdot| $.</p>
+</li>
+<li>
+<p><strong>Special Case (Square and Nonsingular $ A $):</strong><br />
+  If $ A $ is square and nonsingular, the relative condition number is bounded by:
+  $$
+  \text{cond}(x) \leq |A| |A^{-1}|.
+  $$
+  Here, $ |A| |A^{-1}| $ is the <strong>condition number of the matrix $ A $</strong>, which measures the sensitivity of the solution to small perturbations in $ A $ or $ x $.</p>
+</li>
+</ul>
+<p>### 4. <strong>Conditioning of Polynomial Zeros</strong></p>
+<p>Let $ q(x) = x^2 - 2x + 1 $, a quadratic polynomial with a double root at $ x = 1 $. The computational task is to find the roots of $ q(x) $ based on its power basis coefficients <span class="arithmatex">\([1, -2, 1]\)</span>. Here are the key observations:</p>
+<ul>
+<li><strong>Perturbation and Root Sensitivity:</strong><br />
+  If $ q(x) $ is perturbed by a small error $ \epsilon $, the polynomial becomes $ q(x) + \epsilon = x^2 - 2x + 1 + \epsilon $.<br />
+  The double root at $ x = 1 $ splits into two roots:
+  $$
+  x = 1 \pm \sqrt{\epsilon}.
+  $$</li>
+</ul>
+<p>A <strong>relative error</strong> of $ \epsilon $ in the coefficients leads to a <strong>relative error</strong> of $ \sqrt{\epsilon} $ in the roots.</p>
+<ul>
+<li>
+<p><strong>Infinite Condition Number:</strong><br />
+  For small $ \epsilon $, the roots change dramatically, even for tiny perturbations. Specifically, as $ \epsilon \to 0 $, the <strong>rate of change</strong> of the roots becomes infinite.<br />
+  The condition number of the coefficients <span class="arithmatex">\([1, -2, 1]\)</span> for finding the roots is thus <strong>infinite</strong>.</p>
+</li>
+<li>
+<p><strong>Insight:</strong><br />
+  The example highlights that <strong>polynomial root finding is highly ill-conditioned</strong> when the polynomial has multiple or near-multiple roots.<br />
+  However, strictly speaking, it is the <strong>coefficients</strong> that are ill-conditioned, not the roots themselves, as the coefficients serve as the input data for this calculation.</p>
+</li>
+</ul>
+<hr />
+<h3 id="5-wilkinson-polynomial">5. <strong>Wilkinson Polynomial</strong><a class="headerlink" href="#5-wilkinson-polynomial" title="Permanent link">⚓︎</a></h3>
+<p>The Wilkinson polynomial is defined as:
+$$
+w(x) = (x - 1)(x - 2)\cdots(x - 20),
+$$
+or equivalently:
+$$
+w(x) = x^{20} - 210x^{19} + 20615x^{18} - \cdots + 2432902008176640000.
+$$</p>
+<ul>
+<li>
+<p><strong>Ill-Conditioning of Roots:</strong><br />
+  Although the roots $ 1, 2, 3, \ldots, 20 $ are distinct, they are highly sensitive to small changes in the polynomial's coefficients, particularly the coefficient of $ x^{19} $.</p>
+</li>
+<li>
+<p><strong>Perturbation Example:</strong><br />
+  Perturb the $ x^{19} $-coefficient from $ -210 $ to $ -210 - 2^{-23} $ ($ \approx -210 - 1.12 \times 10^{-7} $).<br />
+  This small change causes drastic shifts in some roots:</p>
+</li>
+<li>
+<p>Roots $ 16 $ and $ 17 $ shift to a <strong>complex conjugate pair</strong> approximately equal to:
+    $$
+    16.73 \pm 2.81i.
+    $$</p>
+</li>
+<li>
+<p><strong>Condition Numbers of Perturbed Roots:</strong><br />
+  For the root near $ 16 $ (denoted $ P_{16}(z) $) and the root near $ 17 $ ($ P_{17}(z) $), the condition numbers with respect to the perturbed coefficient $ z = 210 $ are:
+  $$
+  \text{cond}<em>{16}(210) \approx 3 \times 10^{10}, \quad \text{cond}</em>{17}(210) \approx 2 \times 10^{10}.
+  $$</p>
+</li>
+<li>
+<p><strong>Asymptotic Region Failure:</strong><br />
+  The condition numbers are so large that even a perturbation as small as $ 2^{-23} $ falls <strong>outside the asymptotic region</strong> where the higher-order terms $ o(\delta z / z) $ in Fact 2 can be neglected.</p>
+</li>
+</ul>
+<hr />
+<h3 id="insights">Insights:<a class="headerlink" href="#insights" title="Permanent link">⚓︎</a></h3>
+<ol>
+<li>Polynomial root finding from power basis coefficients is inherently <strong>ill-conditioned</strong>, especially for polynomials with closely spaced, multiple, or near-multiple roots.</li>
+<li>In practice, numerical algorithms must take such sensitivities into account, often using alternative representations (e.g., Chebyshev polynomials or orthogonal bases) to mitigate ill-conditioning.</li>
+</ol>
+<h3 id="numerical-stability-and-instability"><strong>Numerical Stability and Instability</strong><a class="headerlink" href="#numerical-stability-and-instability" title="Permanent link">⚓︎</a></h3>
+<p>Numerical stability is a crucial concept in numerical analysis, concerning how well an algorithm handles errors introduced during computation, such as rounding or truncation errors. Here's an outline based on the definitions provided:</p>
+<hr />
+<h3 id="1-definitions"><strong>1. Definitions</strong><a class="headerlink" href="#1-definitions" title="Permanent link">⚓︎</a></h3>
+<h4 id="forward-error"><strong>Forward Error</strong><a class="headerlink" href="#forward-error" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li><strong>Definition:</strong> The difference between the exact function evaluation $ f(x) $ and the perturbed function evaluation $ \hat{f}(x) $:
+  $$
+  \text{Forward error} = f(x) - \hat{f}(x).
+  $$</li>
+</ul>
+<h4 id="backward-error"><strong>Backward Error</strong><a class="headerlink" href="#backward-error" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li><strong>Definition:</strong> A vector $ e \in \mathbb{R}^n $ of the smallest norm for which:
+  $$
+  f(x + e) = \hat{f}(x).
+  $$
+  If no such $ e $ exists, the backward error is undefined.</li>
+<li><strong>Interpretation:</strong> The backward error measures how far the input $ x $ would need to be perturbed to make the perturbed output $ \hat{f}(x) $ an exact evaluation.</li>
+</ul>
+<hr />
+<h3 id="2-numerical-stability"><strong>2. Numerical Stability</strong><a class="headerlink" href="#2-numerical-stability" title="Permanent link">⚓︎</a></h3>
+<h4 id="forward-stability"><strong>Forward Stability</strong><a class="headerlink" href="#forward-stability" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li><strong>Definition:</strong> An algorithm is forward stable if the <strong>forward relative error</strong> is small for all valid inputs $ x $:
+  $$
+  \frac{|f(x) - \hat{f}(x)|}{|f(x)|} \leq \epsilon,
+  $$
+  where $ \epsilon $ is a modest multiple of the unit roundoff error or truncation error.</li>
+<li><strong>Interpretation:</strong> The computed solution is close to the exact solution, within the error limits dictated by the precision of the input.</li>
+</ul>
+<h4 id="backward-stability"><strong>Backward Stability</strong><a class="headerlink" href="#backward-stability" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li><strong>Definition:</strong> An algorithm is backward stable if the backward error exists and satisfies:
+  $$
+  \frac{|e|}{|x|} \leq \epsilon,
+  $$
+  for all valid inputs $ x $, where $ \epsilon $ is small.</li>
+<li><strong>Interpretation:</strong> A backward stable algorithm effectively computes the exact solution to a nearby problem. The perturbation in the input is proportional to the inherent errors in the computation.</li>
+</ul>
+<h4 id="strong-stability"><strong>Strong Stability:</strong><a class="headerlink" href="#strong-stability" title="Permanent link">⚓︎</a></h4>
+<p>Backward stability is sometimes referred to as strong stability due to its rigorous error guarantees.</p>
+<hr />
+<h3 id="3-practical-implications"><strong>3. Practical Implications</strong><a class="headerlink" href="#3-practical-implications" title="Permanent link">⚓︎</a></h3>
+<ul>
+<li><strong>Stable Algorithms:</strong> Produce results that are <strong>as accurate as the input data allows</strong>. Errors introduced during computation do not grow disproportionately.</li>
+<li><strong>Unstable Algorithms:</strong> Amplify rounding or truncation errors, potentially leading to results that are much less accurate than the errors in the input data would suggest.</li>
+</ul>
+<hr />
+<h3 id="4-examples"><strong>4. Examples</strong><a class="headerlink" href="#4-examples" title="Permanent link">⚓︎</a></h3>
+<ul>
+<li><strong>Forward Stable Algorithms:</strong> Gaussian elimination with partial pivoting is forward stable for most practical problems.</li>
+<li><strong>Backward Stable Algorithms:</strong> Many algorithms for solving linear systems or eigenvalue problems (e.g., LU decomposition or QR decomposition) are designed to be backward stable, ensuring numerical robustness.</li>
+</ul>
+<hr />
+<h3 id="5-error-size"><strong>5. Error Size</strong><a class="headerlink" href="#5-error-size" title="Permanent link">⚓︎</a></h3>
+<p>The term <strong>"small"</strong> in these definitions usually means a <strong>modest multiple of the size of the input errors</strong>, often determined by the machine precision or rounding unit.</p>
+<hr />
+<h3 id="summary"><strong>Summary</strong><a class="headerlink" href="#summary" title="Permanent link">⚓︎</a></h3>
+<p>Numerical stability ensures that computational errors introduced during algorithm execution do not significantly degrade the accuracy of the results. Forward stability focuses on small output errors, while backward stability ensures that the computed result corresponds to the exact solution of a slightly perturbed problem.</p>
+<h3 id="weak-numerical-stability-vs-numerical-stability"><strong>Weak Numerical Stability vs Numerical Stability</strong><a class="headerlink" href="#weak-numerical-stability-vs-numerical-stability" title="Permanent link">⚓︎</a></h3>
+<p>Numerical stability in algorithms characterizes how errors from rounding and truncation affect the accuracy of results. Here's a detailed breakdown based on the provided definitions:</p>
+<hr />
+<h3 id="1-weak-numerical-stability"><strong>1. Weak Numerical Stability</strong><a class="headerlink" href="#1-weak-numerical-stability" title="Permanent link">⚓︎</a></h3>
+<h4 id="definition"><strong>Definition:</strong><a class="headerlink" href="#definition" title="Permanent link">⚓︎</a></h4>
+<p>A numerical algorithm is <strong>weakly numerically stable</strong> if rounding and truncation errors cause it to evaluate a perturbed function $ \hat{f}(x) $ satisfying:
+$$
+\frac{|f(x) - \hat{f}(x)|}{|f(x)|} \leq \epsilon \cdot \text{cond}(f(x)),
+$$
+for all valid inputs $ x $.</p>
+<h4 id="key-characteristics"><strong>Key Characteristics:</strong><a class="headerlink" href="#key-characteristics" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li>The <strong>forward error</strong> is <strong>proportional to the condition number</strong> of the input $ x $ and a small error factor $ \epsilon $ (such as the machine precision).</li>
+<li><strong>Forward Error Bound:</strong> The error magnitude is no worse than what would result from <strong>perturbing the data by a small multiple of the unit roundoff.</strong></li>
+<li><strong>No Backward Error Guarantee:</strong> Weak numerical stability does not ensure the existence of a backward error or that the computed result corresponds to a small perturbation of the input.</li>
+<li><strong>Weaker Variant:</strong> An even weaker form of weak stability guarantees the relative error bound only when the data is <strong>well-conditioned.</strong></li>
+</ul>
+<h4 id="implications"><strong>Implications:</strong><a class="headerlink" href="#implications" title="Permanent link">⚓︎</a></h4>
+<p>Weak numerical stability allows for larger errors in ill-conditioned inputs, where the condition number is high. This makes the method less robust in general compared to numerically stable algorithms.</p>
+<hr />
+<h3 id="2-numerical-stability_1"><strong>2. Numerical Stability</strong><a class="headerlink" href="#2-numerical-stability_1" title="Permanent link">⚓︎</a></h3>
+<h4 id="definition_1"><strong>Definition:</strong><a class="headerlink" href="#definition_1" title="Permanent link">⚓︎</a></h4>
+<p>A numerical algorithm is <strong>numerically stable</strong> if rounding and truncation errors cause it to evaluate a perturbed function $ \hat{f}(x) $ satisfying:
+$$
+\frac{|f(x + e) - \hat{f}(x)|}{|f(x)|} \leq \epsilon,
+$$
+where $ e $ is a small <strong>relative-to-$ x $</strong> backward error such that $ |e| \leq \epsilon |x| $.</p>
+<h4 id="key-characteristics_1"><strong>Key Characteristics:</strong><a class="headerlink" href="#key-characteristics_1" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li><strong>Backward Error Guarantee:</strong> The computed value $ \hat{f}(x) $ corresponds to the exact function $ f(x) $ evaluated at a nearby data point $ x + e $.</li>
+<li><strong>Robustness:</strong> Numerical stability ensures that the result is consistent with a slight perturbation in the input.</li>
+<li><strong>Behavior for Ill-Conditioned Inputs:</strong> While the forward error can still be large for ill-conditioned inputs (due to high condition numbers), the algorithm remains robust because the backward error is small.</li>
+</ul>
+<hr />
+<h3 id="3-comparisons"><strong>3. Comparisons</strong><a class="headerlink" href="#3-comparisons" title="Permanent link">⚓︎</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Aspect</strong></th>
+<th><strong>Weak Numerical Stability</strong></th>
+<th><strong>Numerical Stability</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Forward Error</strong></td>
+<td>Proportional to $ \epsilon \cdot \text{cond}(f(x)) $.</td>
+<td>Proportional to $ \epsilon $, independent of condition number.</td>
+</tr>
+<tr>
+<td><strong>Backward Error</strong></td>
+<td>No guarantee or may not exist.</td>
+<td>Guaranteed to exist and be small ($</td>
+</tr>
+<tr>
+<td><strong>Error Interpretation</strong></td>
+<td>May not correspond to small perturbations of the input.</td>
+<td>Corresponds to a small perturbation of the input.</td>
+</tr>
+<tr>
+<td><strong>Handling Ill-Conditioned Data</strong></td>
+<td>Errors can grow with condition number.</td>
+<td>Backward error remains small; forward error may still be large.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="4-visualization-figure-372"><strong>4. Visualization (Figure 37.2)</strong><a class="headerlink" href="#4-visualization-figure-372" title="Permanent link">⚓︎</a></h3>
+<ul>
+<li>
+<p><strong>Weak Stability:</strong><br />
+  The computed value $ \hat{f}(x) $ lies within a larger circle around $ f(x) $, which includes errors consistent with the condition number. The result may not correspond to a small input perturbation.</p>
+</li>
+<li>
+<p><strong>Numerical Stability:</strong><br />
+  The computed value $ \hat{f}(x) $ lies <strong>near</strong> or inside the image of the small perturbations $ x + e $. This implies that the result corresponds to a slightly perturbed input.</p>
+</li>
+<li>
+<p><strong>Backward Stability:</strong><br />
+  The computed value $ \hat{f}(x) $ lies entirely within the shaded image of the small perturbations of $ x $.</p>
+</li>
+</ul>
+<hr />
+<h3 id="5-summary"><strong>5. Summary</strong><a class="headerlink" href="#5-summary" title="Permanent link">⚓︎</a></h3>
+<ul>
+<li><strong>Weak Stability</strong> provides weaker guarantees and is more error-prone, especially for ill-conditioned data, as it allows larger forward errors without requiring backward stability.</li>
+<li><strong>Numerical Stability</strong> ensures more robust performance by tightly linking the computed result to a small perturbation in the input, making it preferable for reliable computations.</li>
+</ul>
+<h3 id="key-facts-about-numerical-stability-and-backward-stability"><strong>Key Facts about Numerical Stability and Backward Stability</strong><a class="headerlink" href="#key-facts-about-numerical-stability-and-backward-stability" title="Permanent link">⚓︎</a></h3>
+<h4 id="1-numerical-stability-and-ill-conditioned-problems"><strong>1. Numerical Stability and Ill-Conditioned Problems</strong><a class="headerlink" href="#1-numerical-stability-and-ill-conditioned-problems" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li><strong>Ill-Conditioned Problems:</strong> Even a numerically stable algorithm may yield <strong>inaccurate results</strong> when applied to an ill-conditioned problem. This is because small errors in the input data (e.g., rounding or measurement errors) can amplify into large errors in the solution due to the problem's inherent sensitivity.</li>
+<li><strong>No Algorithmic Correction:</strong> A numerical algorithm cannot compensate for errors already present in the input data or create information that wasn't implicitly there. For ill-conditioned problems, inaccuracies are often unavoidable.</li>
+</ul>
+<hr />
+<h4 id="2-backward-stability"><strong>2. Backward Stability</strong><a class="headerlink" href="#2-backward-stability" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li><strong>Perturbation Equivalent:</strong> A <strong>backward stable algorithm</strong> ensures that its rounding and truncation errors are equivalent to solving the problem with a slightly perturbed input. The computed results are <strong>realistic</strong> and consistent with an exact arithmetic solution for the perturbed data.</li>
+<li><strong>Negligibility:</strong> In most cases, this additional error due to backward instability is negligible compared to the inherent data errors.</li>
+</ul>
+<hr />
+<h4 id="3-forward-error-in-backward-stability"><strong>3. Forward Error in Backward Stability</strong><a class="headerlink" href="#3-forward-error-in-backward-stability" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li><strong>Condition Number Dependency:</strong> The <strong>forward error</strong> in a backward stable algorithm follows the <strong>condition number bound</strong> (Fact 2, Section 37.4). This means the forward error can grow in proportion to the problem's condition number, especially for ill-conditioned data.</li>
+</ul>
+<hr />
+<h4 id="4-examples-of-backward-stable-algorithms"><strong>4. Examples of Backward Stable Algorithms</strong><a class="headerlink" href="#4-examples-of-backward-stable-algorithms" title="Permanent link">⚓︎</a></h4>
+<p>The following are well-known backward stable algorithms and their properties:</p>
+<ol>
+<li><strong>Single Floating Point Operations:</strong>  </li>
+<li>
+<p>Any single floating-point operation (e.g., addition, multiplication) is <strong>both forward and backward stable</strong>.</p>
+</li>
+<li>
+<p><strong>Dot Product Algorithm (Naive):</strong>  </p>
+</li>
+<li>
+<p>The naive dot product algorithm is <strong>backward stable</strong>, but not generally forward stable due to potential <strong>cancellation of significant digits</strong> during summation.</p>
+</li>
+<li>
+<p><strong>Gaussian Elimination:</strong>  </p>
+</li>
+<li><strong>With complete pivoting:</strong> Strictly backward stable.  </li>
+<li>
+<p><strong>With partial pivoting:</strong> Not strictly backward stable, but considered <strong>“backward stable in practice”</strong> since instability cases are extraordinarily rare.</p>
+</li>
+<li>
+<p><strong>Triangular Back Substitution:</strong>  </p>
+</li>
+<li>The back-substitution algorithm computes a solution $ \hat{x} $ such that it solves a nearby system $ (T + E)\hat{x} = b $, where $ |e_{ij}| \leq |t_{ij}| $.  </li>
+<li>
+<p><strong>Backward Stable:</strong> Ensures the computed solution is consistent with a slightly perturbed system.</p>
+</li>
+<li>
+<p><strong>QR Factorization (Householder and Givens Methods):</strong>  </p>
+</li>
+<li>
+<p>Both methods for $ A = QR $, where $ Q $ is orthogonal and $ R $ is upper triangular, are <strong>backward stable</strong>.</p>
+</li>
+<li>
+<p><strong>Singular Value Decomposition (SVD):</strong>  </p>
+</li>
+<li>
+<p>The Golub–Kahan–Reinsch algorithm is <strong>backward stable</strong> for computing $ A = U \Sigma V^T $, where $ U $ and $ V $ are orthogonal matrices, and $ \Sigma $ is diagonal.</p>
+</li>
+<li>
+<p><strong>Least-Squares Problems:</strong>  </p>
+</li>
+<li>
+<p>The following methods for solving least-squares problems are <strong>backward stable</strong>:  </p>
+<ul>
+<li>Householder QR Factorization.  </li>
+<li>Givens QR Factorization.  </li>
+<li>Singular Value Decomposition (SVD).</li>
+</ul>
+</li>
+<li>
+<p><strong>Eigenvalue Computations:</strong>  </p>
+</li>
+<li>The implicit double-shift QR iteration is <strong>backward stable</strong> for finding eigenvalues.</li>
+</ol>
+<hr />
+<h3 id="practical-implications"><strong>Practical Implications</strong><a class="headerlink" href="#practical-implications" title="Permanent link">⚓︎</a></h3>
+<ul>
+<li><strong>Selection of Algorithms:</strong> Backward stable algorithms are highly preferred in practice because they ensure realistic results for small perturbations, even if forward errors are amplified for ill-conditioned data.</li>
+<li><strong>Understanding Stability:</strong> Recognizing whether an algorithm is backward or forward stable helps predict its behavior in different numerical contexts.</li>
+</ul>
+<h3 id="procedures-to-compute-stability-and-conditioning"><strong>Procedures to Compute Stability and Conditioning</strong><a class="headerlink" href="#procedures-to-compute-stability-and-conditioning" title="Permanent link">⚓︎</a></h3>
+<p>To analyze the <strong>numerical stability</strong> of algorithms and the <strong>conditioning</strong> of computational problems, follow these structured steps:</p>
+<hr />
+<h3 id="1-compute-problem-conditioning"><strong>1. Compute Problem Conditioning</strong><a class="headerlink" href="#1-compute-problem-conditioning" title="Permanent link">⚓︎</a></h3>
+<h4 id="definition_2"><strong>Definition:</strong><a class="headerlink" href="#definition_2" title="Permanent link">⚓︎</a></h4>
+<p>Conditioning measures how sensitive a problem's output is to small perturbations in the input.</p>
+<h4 id="steps-to-compute-conditioning"><strong>Steps to Compute Conditioning</strong><a class="headerlink" href="#steps-to-compute-conditioning" title="Permanent link">⚓︎</a></h4>
+<ol>
+<li>
+<p><strong>Define the Function $ f(x) $:</strong><br />
+   Let $ f : \mathbb{R}^n \to \mathbb{R}^m $ represent the function you are analyzing.</p>
+</li>
+<li>
+<p><strong>Determine Sensitivity:</strong><br />
+   Compute the <strong>condition number</strong>:
+   $$
+   \text{cond}_f(x) = \frac{|D(x)| \cdot |x|}{|f(x)|}
+   $$
+   where $ D(x) $ is the derivative (or Jacobian) of $ f(x) $.</p>
+</li>
+<li>
+<p><strong>Interpret Results:</strong></p>
+</li>
+<li>If $ \text{cond}_f(x) $ is large, the problem is <strong>ill-conditioned</strong>, meaning small input errors may lead to large output errors.</li>
+<li>If $ \text{cond}_f(x) $ is small, the problem is <strong>well-conditioned</strong>.</li>
+</ol>
+<h4 id="example-polynomial-root-finding"><strong>Example: Polynomial Root Finding</strong><a class="headerlink" href="#example-polynomial-root-finding" title="Permanent link">⚓︎</a></h4>
+<p>For $ q(x) = x^2 - 2x + 1 $:
+- Double root at $ x = 1 $.
+- Perturbation $ \epsilon $ in coefficients causes root error $ \sqrt{\epsilon} $, leading to infinite condition number for the coefficients near multiple roots.</p>
+<hr />
+<h3 id="2-assess-algorithm-stability"><strong>2. Assess Algorithm Stability</strong><a class="headerlink" href="#2-assess-algorithm-stability" title="Permanent link">⚓︎</a></h3>
+<h4 id="definition_3"><strong>Definition:</strong><a class="headerlink" href="#definition_3" title="Permanent link">⚓︎</a></h4>
+<p>Stability measures how rounding and truncation errors affect the accuracy of the algorithm's result.</p>
+<h4 id="steps-to-compute-algorithm-stability"><strong>Steps to Compute Algorithm Stability</strong><a class="headerlink" href="#steps-to-compute-algorithm-stability" title="Permanent link">⚓︎</a></h4>
+<ol>
+<li><strong>Forward Error Analysis:</strong>
+   Evaluate the forward error:
+   $$
+   \text{Forward Error} = \frac{|f(x) - \hat{f}(x)|}{|f(x)|}
+   $$</li>
+<li>
+<p>If the error is small for all inputs, the algorithm is <strong>forward stable</strong>.</p>
+</li>
+<li>
+<p><strong>Backward Error Analysis:</strong>
+   Compute the smallest perturbation $ e $ such that:
+   $$
+   f(x + e) = \hat{f}(x)
+   $$</p>
+</li>
+<li>
+<p>If $ |e| \leq \epsilon |x| $, the algorithm is <strong>backward stable</strong>.</p>
+</li>
+<li>
+<p><strong>Weak Stability:</strong>
+   If rounding errors satisfy:
+   $$
+   \frac{|f(x) - \hat{f}(x)|}{|f(x)|} \leq \epsilon \cdot \text{cond}_f(x)
+   $$
+   the algorithm is <strong>weakly stable</strong>.</p>
+</li>
+</ol>
+<h4 id="example-naive-dot-product"><strong>Example: Naive Dot Product</strong><a class="headerlink" href="#example-naive-dot-product" title="Permanent link">⚓︎</a></h4>
+<p>Given $ x = [a, b] $ and $ P(x) = a - b $:
+- For $ a \approx b $, significant digit cancellation may occur.
+- Backward stability holds, but forward stability fails because the subtraction magnifies relative errors.</p>
+<hr />
+<h3 id="3-numerical-conditioning-of-matrix-algorithms"><strong>3. Numerical Conditioning of Matrix Algorithms</strong><a class="headerlink" href="#3-numerical-conditioning-of-matrix-algorithms" title="Permanent link">⚓︎</a></h3>
+<h4 id="matrix-multiplication-conditioning"><strong>Matrix Multiplication Conditioning:</strong><a class="headerlink" href="#matrix-multiplication-conditioning" title="Permanent link">⚓︎</a></h4>
+<p>Condition number for $ A x $ is given by:
+$$
+\text{cond}(x) = \frac{|A| \cdot |x|}{|Ax|}
+$$
+For nonsingular $ A $:
+$$
+\text{cond}(x) \leq |A| \cdot |A^{-1}|
+$$</p>
+<h4 id="example-gaussian-elimination"><strong>Example: Gaussian Elimination</strong><a class="headerlink" href="#example-gaussian-elimination" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li>Complete pivoting ensures backward stability.</li>
+<li>Partial pivoting may not be strictly backward stable but is considered stable in practice.</li>
+</ul>
+<hr />
+<h3 id="4-numerical-stability-in-least-squares-problems"><strong>4. Numerical Stability in Least Squares Problems</strong><a class="headerlink" href="#4-numerical-stability-in-least-squares-problems" title="Permanent link">⚓︎</a></h3>
+<h4 id="method"><strong>Method:</strong><a class="headerlink" href="#method" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li>Solve $ Ax = b $ using QR factorization or SVD.</li>
+<li>Stability depends on:</li>
+<li>Orthogonal $ Q $ properties in QR decomposition.</li>
+<li>Singular values of $ A $ in SVD.</li>
+</ul>
+<h4 id="example-qr-factorization"><strong>Example: QR Factorization</strong><a class="headerlink" href="#example-qr-factorization" title="Permanent link">⚓︎</a></h4>
+<p>Given $ A = QR $, where $ Q $ is orthogonal and $ R $ is upper triangular:
+- Both Householder and Givens methods are backward stable.</p>
+<hr />
+<h3 id="5-eigenvalue-problems"><strong>5. Eigenvalue Problems</strong><a class="headerlink" href="#5-eigenvalue-problems" title="Permanent link">⚓︎</a></h3>
+<h4 id="method_1"><strong>Method:</strong><a class="headerlink" href="#method_1" title="Permanent link">⚓︎</a></h4>
+<ul>
+<li>Compute eigenvalues using iterative techniques like QR iterations.</li>
+</ul>
+<h4 id="example-wilkinson-polynomial"><strong>Example: Wilkinson Polynomial</strong><a class="headerlink" href="#example-wilkinson-polynomial" title="Permanent link">⚓︎</a></h4>
+<p>Perturbing the $ x^{19} $ coefficient in $ w(x) = (x-1)(x-2)...(x-20) $ drastically changes eigenvalues.<br />
+Condition numbers $ \text{cond}<em>{16}(210) \approx 3 \times 10^{10} $ and $ \text{cond}</em>{17}(210) \approx 2 \times 10^{10} $ illustrate ill-conditioning.</p>
+<hr />
+<h3 id="conclusion"><strong>Conclusion</strong><a class="headerlink" href="#conclusion" title="Permanent link">⚓︎</a></h3>
+<p>To assess stability and conditioning:
+1. Compute <strong>condition numbers</strong> to measure problem sensitivity.
+2. Evaluate <strong>forward</strong> and <strong>backward errors</strong> for algorithm stability.
+3. Analyze examples such as matrix operations, polynomial roots, or iterative eigenvalue computations to understand practical implications.</p>
+<h3 id="examples-of-numerical-stability-and-conditioning"><strong>Examples of Numerical Stability and Conditioning</strong><a class="headerlink" href="#examples-of-numerical-stability-and-conditioning" title="Permanent link">⚓︎</a></h3>
+<hr />
+<h3 id="1-forward-stable-but-not-backward-stable-outer-product-algorithm"><strong>1. Forward Stable but Not Backward Stable: Outer Product Algorithm</strong><a class="headerlink" href="#1-forward-stable-but-not-backward-stable-outer-product-algorithm" title="Permanent link">⚓︎</a></h3>
+<p><strong>Example:</strong> Compute $ A = xy^T $, where $ x, y \in \mathbb{R}^n $.<br />
+- <strong>Forward Stability:</strong><br />
+  - The computed $ A $ (outer product of $ x $ and $ y $) is correctly rounded, ensuring the forward relative error is small.
+  - Example: If $ x = [1, 2] $, $ y = [3, 4] $, then $ A = \begin{bmatrix} 3 &amp; 4 \ 6 &amp; 8 \end{bmatrix} $.
+- <strong>Backward Instability:</strong><br />
+  - Rounding errors perturb $ A $ into a matrix of higher rank, making it impossible to represent $ A $ as $ xy^T $ for perturbed $ x $ and $ y $.</p>
+<hr />
+<h3 id="2-backward-vs-forward-errors-taylor-series-approximation"><strong>2. Backward vs. Forward Errors: Taylor Series Approximation</strong><a class="headerlink" href="#2-backward-vs-forward-errors-taylor-series-approximation" title="Permanent link">⚓︎</a></h3>
+<p><strong>Example:</strong> Evaluate $ f(x) = e^x $ at $ x = 1 $ using the Taylor series approximation:<br />
+$$
+\hat{f}(x) = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!}.
+$$
+- <strong>Forward Error:</strong><br />
+  $$
+  \text{Forward Error} = |f(1) - \hat{f}(1)| \approx 2.7183 - 2.6667 = 0.0516.
+  $$
+- <strong>Backward Error:</strong><br />
+  Solve for $ y $ such that $ f(y) = \hat{f}(1) $. The backward error is:
+  $$
+  1 - \ln(\hat{f}(1)) \approx 1 - \ln(2.6667) = 0.0192.
+  $$</p>
+<hr />
+<h3 id="3-numerically-unstable-algorithm-logarithm-near-zero"><strong>3. Numerically Unstable Algorithm: Logarithm Near Zero</strong><a class="headerlink" href="#3-numerically-unstable-algorithm-logarithm-near-zero" title="Permanent link">⚓︎</a></h3>
+<p><strong>Example:</strong> Evaluate $ f(x) = \ln(1 + x) $ for $ x \approx 0 $ using $ \text{fl}(\ln(1 \oplus x)) $:<br />
+- For $ x = 10^{-16} $ in 16-digit arithmetic:
+  - $ \ln(1 \oplus 10^{-16}) $ is computed as $ \ln(1) = 0 $ due to rounding.<br />
+  - Exact value $ f(x) = 10^{-16} $, so relative error = 100%.</p>
+<ul>
+<li><strong>Analysis:</strong></li>
+<li>The function is well-conditioned ($ \text{cond}_f(x) = 1 $ as $ x \to 0 $), but the algorithm is numerically unstable due to precision loss.</li>
+</ul>
+<hr />
+<h3 id="4-improved-logarithm-algorithm-taylor-series"><strong>4. Improved Logarithm Algorithm: Taylor Series</strong><a class="headerlink" href="#4-improved-logarithm-algorithm-taylor-series" title="Permanent link">⚓︎</a></h3>
+<p><strong>Example:</strong> Use the Taylor expansion:
+$$
+f(x) = \ln(1 + x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots.
+$$
+- <strong>Advantages:</strong>
+  - For $ x \approx 0 $, higher precision is achieved with a few terms.
+- <strong>Limitations:</strong>
+  - Converges slowly for $ |x| \approx 1 $.
+  - Alternative algorithms like $ \text{fl}(\ln(1 \oplus x)) $ may be required for $ |x| &gt; 1 $.</p>
+<hr />
+<h3 id="5-gaussian-elimination-without-pivoting"><strong>5. Gaussian Elimination Without Pivoting</strong><a class="headerlink" href="#5-gaussian-elimination-without-pivoting" title="Permanent link">⚓︎</a></h3>
+<p><strong>Example:</strong> Solve:
+$$
+\begin{aligned}
+10^{-10}x_1 + x_2 &amp;= 1, \
+x_1 + 2x_2 &amp;= 3,
+\end{aligned}
+$$
+using 9-digit arithmetic.<br />
+- <strong>Steps:</strong>
+  - Eliminate $ x_1 $:
+    $$
+    x_2 = 1, \quad x_1 = 0.
+    $$
+  - Exact solution: $ x_1 = 1 - 2 \cdot 10^{-10}, \; x_2 = 1 - 3 \cdot 10^{-10} <span class="arithmatex">\(.  
+- **Analysis:**
+  - Large error is due to numerical instability, not ill-conditioning (\)</span> \kappa(A) \approx 9 $).</p>
+<hr />
+<h3 id="6-unstable-algorithm-for-eigenvalue-computations"><strong>6. Unstable Algorithm for Eigenvalue Computations</strong><a class="headerlink" href="#6-unstable-algorithm-for-eigenvalue-computations" title="Permanent link">⚓︎</a></h3>
+<p><strong>Example:</strong> Compute eigenvalues of $ A = \text{diag}(1, 2, 3, \ldots, 20) $ by finding roots of the characteristic polynomial.<br />
+- <strong>Problem:</strong>
+  - The Wilkinson polynomial has highly ill-conditioned roots, even though the eigenvalues themselves are well-conditioned ($ \kappa \leq |E|_F $ for perturbation $ E $).
+  - Transformation to companion form introduces instability.  </p>
+<hr />
+<h3 id="7-alternative-eigenvalue-algorithms"><strong>7. Alternative Eigenvalue Algorithms</strong><a class="headerlink" href="#7-alternative-eigenvalue-algorithms" title="Permanent link">⚓︎</a></h3>
+<p>Use iterative QR methods to avoid polynomial root finding instability:
+- Implicit double-shift QR iteration is <strong>backward stable</strong>.
+- It directly computes eigenvalues without forming ill-conditioned polynomials.</p>
+<hr />
+<h3 id="conclusion_1"><strong>Conclusion</strong><a class="headerlink" href="#conclusion_1" title="Permanent link">⚓︎</a></h3>
+<ul>
+<li>Numerical stability and conditioning depend on both the algorithm and the problem.  </li>
+<li>Forward stability focuses on relative error in results, while backward stability ensures results align with a slightly perturbed input.  </li>
+<li>Examples highlight the importance of carefully choosing stable algorithms for ill-conditioned problems.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Linear_Transformations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Linear Transformations">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Linear Transformations
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../pdsa/prosandcons/" class="md-footer__link md-footer__link--next" aria-label="Next: From Applications to Advantages and Disadvantages">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                From Applications to Advantages and Disadvantages
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Ajeet Kumar
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://ajeetkbhardwaj.github.io/ajeetkbhardwaj" target="_blank" rel="noopener" title="ajeetkbhardwaj.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/ajeetkumar09/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
