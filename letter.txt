@@ -1,0 +1,27 @@
+1. Why do I want to attend the winter school ?
+
+I am excited about the opportunity to attend winter school because of unique chance to delve into the latest advacement
+in scalable systems for big data, data science and artificial intelligence.
+
+As a master student of Mathematics and Computing(Applied Mathematics), I am eager to expand my knowledge and skills in 
+handling large scale dataset and developing efficient data pipelines.
+
+I am confident that experiance of attending winter school will be invaluable in shaping my future research direction and contributing
+to the development of innovative solutions in this field.
+
+
+2. Would you like to tell us more specific about the your course work relevent to the winter school 
+
+One of the specific feature  I would like to highlight about the my marksheet(course work)
+is my consistent performance in B.Sc(Hons) Applied Mathematics and M.Sc Mathematics and Computing.
+particulary,
+1. Data Structure 
+2. Algorithm Design and Analysis
+3. Theory of Computation
+4. Graph Theory
+5. Probability and Statistics
+6. Data Analytics using Python
+7. Machine and Deep Learning
+
+I have also attended many workshops, lectures and seminar on the topics of data science, data analytics
+large language models finetuning.
