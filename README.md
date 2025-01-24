@@ -3,7 +3,7 @@
 
 
 Please visite the 
-[Website](https://ajeetkbhardwaj.github.io/Lab-for-Applied-Mathematics/)
+[Website](https://ajeetkbhardwaj.github.io/Foundation-of-Applied-Mathematics/)
 
 
 
