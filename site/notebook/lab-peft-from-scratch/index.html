@@ -1,0 +1,1660 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../lab-prompting/">
+      
+      
+        <link rel="next" href="../lab-Scipy-Optimize/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.jpg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Lab peft from scratch - AI-for-Developers</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Libre Baskerville";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#setup-and-requirements" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI-for-Developers" class="md-header__button md-logo" aria-label="AI-for-Developers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14.27 10.64 13A11.24 11.24 0 0 0 5 10.18v6.95c2.61.34 5 1.34 7 2.82 2-1.48 4.39-2.48 7-2.82v-6.95c-2.16.39-4.09 1.39-5.64 2.82M19 8.15c.65-.1 1.32-.15 2-.15v11c-3.5 0-6.64 1.35-9 3.54C9.64 20.35 6.5 19 3 19V8c.68 0 1.35.05 2 .15 2.69.41 5.1 1.63 7 3.39 1.9-1.76 4.31-2.98 7-3.39M12 6c.27 0 .5-.1.71-.29.19-.21.29-.44.29-.71s-.1-.5-.29-.71C12.5 4.11 12.27 4 12 4s-.5.11-.71.29c-.18.21-.29.45-.29.71s.11.5.29.71c.21.19.45.29.71.29m2.12 1.12a2.997 2.997 0 1 1-4.24-4.24 2.997 2.997 0 1 1 4.24 4.24"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI-for-Developers
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab peft from scratch
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ajeetkbhardwaj/Lab-for-Applied-Mathematics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ajeet Kumar
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../def/Eigenvalue_and_Eigenvector/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Definition
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../lab-prompting/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Notebooks
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI-for-Developers" class="md-nav__button md-logo" aria-label="AI-for-Developers" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14.27 10.64 13A11.24 11.24 0 0 0 5 10.18v6.95c2.61.34 5 1.34 7 2.82 2-1.48 4.39-2.48 7-2.82v-6.95c-2.16.39-4.09 1.39-5.64 2.82M19 8.15c.65-.1 1.32-.15 2-.15v11c-3.5 0-6.64 1.35-9 3.54C9.64 20.35 6.5 19 3 19V8c.68 0 1.35.05 2 .15 2.69.41 5.1 1.63 7 3.39 1.9-1.76 4.31-2.98 7-3.39M12 6c.27 0 .5-.1.71-.29.19-.21.29-.44.29-.71s-.1-.5-.29-.71C12.5 4.11 12.27 4 12 4s-.5.11-.71.29c-.18.21-.29.45-.29.71s.11.5.29.71c.21.19.45.29.71.29m2.12 1.12a2.997 2.997 0 1 1-4.24-4.24 2.997 2.997 0 1 1 4.24 4.24"/></svg>
+
+    </a>
+    AI-for-Developers
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ajeetkbhardwaj/Lab-for-Applied-Mathematics" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Ajeet Kumar
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Definition
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Definition
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../def/Eigenvalue_and_Eigenvector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Eigen Value and Vecotr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../def/Linear_Transformations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Transformations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../def/MatrixComputation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Matrix Computation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Notebooks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Notebooks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-prompting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab-111 : LLM Prompting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Lab peft from scratch
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lab peft from scratch
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup-and-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup and Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems-with-fine-tuning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problems with Fine-tuning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tutorials
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab-Scipy-Optimize/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optimization using Scipy i.e scipy.optimize
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup-and-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup and Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems-with-fine-tuning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problems with Fine-tuning
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorials" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tutorials
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 align="center">PEFT from Scratch</h1>
+<p>Questions
+1. How to implement different PEFT approaches ?
+2. How to update these large pre-trained models with low resources  ?
+3. How to apply PEFT methods to large language models for optimization of the model performance efficiently ?</p>
+<h3 id="setup-and-requirements">Setup and Requirements<a class="headerlink" href="#setup-and-requirements" title="Permanent link">⚓︎</a></h3>
+<p>We will use the pretrained model t5-small or autoregressive models like gpt-neo-125M for running our experimentation faster.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm.notebook</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">widgets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">fixed</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForSequenceClassification</span><span class="p">,</span> <span class="n">AutoModelForCausalLM</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span>  <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">TrainingArguments</span><span class="p">,</span> <span class="n">Trainer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datasets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">peft</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_peft_model</span><span class="p">,</span> <span class="n">LoraConfig</span><span class="p">,</span> <span class="n">TaskType</span><span class="p">,</span> <span class="n">PrefixTuningConfig</span><span class="p">,</span> <span class="n">PromptEncoderConfig</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># parameters </span>
+<span class="n">random_seed</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">random_seed</span><span class="p">)</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;google-t5/t5-small&quot;</span>
+<span class="n">causal_model</span> <span class="o">=</span> <span class="s2">&quot;EleutherAI/gpt-neo-125m&quot;</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="s2">&quot;stanfordnlp/imdb&quot;</span>
+
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-4</span>
+
+<span class="n">max_length</span> <span class="o">=</span> <span class="mi">512</span>
+</code></pre></div>
+<pre><code>cpu
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">dataset</span><span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;imdb&#39;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;train[45%:55%]&#39;</span><span class="p">,</span> <span class="s1">&#39;test[45%:55%]&#39;</span><span class="p">,</span> <span class="s1">&#39;unsupervised[45%:55%]&#39;</span><span class="p">])</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">DatasetDict</span><span class="p">({</span>
+    <span class="s2">&quot;train&quot;</span><span class="p">:</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="s2">&quot;test&quot;</span><span class="p">:</span><span class="n">dataset</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="s2">&quot;unsupervised&quot;</span><span class="p">:</span><span class="n">dataset</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="p">})</span>
+
+<span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;negative&quot;</span><span class="p">,</span> <span class="s2">&quot;positive&quot;</span><span class="p">]</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="p">{</span><span class="s2">&quot;text_label&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">classes</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]},</span>
+    <span class="n">batched</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">num_proc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+<pre><code>Map:   0%|          | 0/2500 [00:00&lt;?, ? examples/s]
+
+
+
+Map:   0%|          | 0/2500 [00:00&lt;?, ? examples/s]
+
+
+
+Map:   0%|          | 0/5000 [00:00&lt;?, ? examples/s]
+
+
+
+
+
+{'text': "Recap: Full moon. A creature, a huge werewolf, is on the hunt. Not for flesh, not for blood (not that it seem to mind to take a bite on the way though), but for a mate. He is on the hunt for a girl. Not any girl though. The Girl. The girl that is pure (and also a werewolf, although she doesn't know it yet). Three, well check that, two cops (after the first scene) and an old bag lady is all that can stop it, or even knows that the thing killing and eating a lot of folks around full moon is a werewolf. This particular powerful werewolf, Darkwolf, is closing in on the girl. If he gets her, mankind is doomed. Now the cops has to find the girl, convince her not only that there is someone, a werewolf nonetheless, that wants to rape her, and perhaps kill her, but that she is a werewolf herself. And then they got to stop him...&lt;br /&gt;&lt;br /&gt;Comments: This is one for the boys, the teenage boys. A lot of scenes with semi-nude girls more or less important for the plot. Mostly less. Well I guess you need something to fill some time because the plot is (expectedly) thin. And unfortunately there is little besides the girls to help the plot from breaking. One usually turns to two main themes. Nudity. Check. And then special effects. Hmm... Well there are some things that you might call effects. They're not very special though. In fact, to be blunt, they are very bad. The movie seems to be suffering of a lack of funds. They couldn't afford clothes for some of the girls ;), and the effects are cheap. Some of the transformations between werewolf and human form, obviously done by computer, are really bad. You might overlook such things. But the Darkwolf in itself is very crude too, and you never get to see any killings. Just some mutilated corpses afterwards. And there is surprisingly little blood about, in a movie that honestly should be drenched in blood.&lt;br /&gt;&lt;br /&gt;I'm not sure what to say about actors and characters. Most of the times they do well, but unfortunately there are lapses were the characters (or actors) just looses it. A few of these lapses could be connected with the problems mentioned above. Like the poor effects, or the poor budget(?). That could explain why there is precious little shooting, even if the characters are armed like a small army and the target is in plain sight (and not moving). But hey, when you're in real danger, there nothing that will save your life like a good one-liner...&lt;br /&gt;&lt;br /&gt;Unfortunately that can't explain moments when the Cop, Steve, the only one who knows how to maybe deal with the problem, the werewolf that is, runs away, when the only things he can be sure of, is that the werewolf is coming for the girl, who is just beside him now, and that he cannot let it have her. But sure, it let the makers stretch the ending a little more...&lt;br /&gt;&lt;br /&gt;But I wouldn't mind seeing none of the lead actors/actresses get another try in another movie.&lt;br /&gt;&lt;br /&gt;Well. To give a small conclusion: Not a movie that I recommend.&lt;br /&gt;&lt;br /&gt;3/10",
+ 'label': 0,
+ 'text_label': 'negative'}
+</code></pre>
+<h2 id="problems-with-fine-tuning">Problems with Fine-tuning<a class="headerlink" href="#problems-with-fine-tuning" title="Permanent link">⚓︎</a></h2>
+<p>Fine-tuning large language models like GPT are expensive, present several significant challenges for the average user such as computational expense, storage requirements and operational flexibility when managing multiple fine-tuned models.
+1. High computational requirements
+2. Expensive storage for checkpoints
+3. Slow task switching with multiple fine-tuned models
+4. catastrophic forgetting
+5. Quality and Representation of Fine-tuning Data</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">_</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># define a rank 2 matrix W of size 10 x 10</span>
+<span class="n">d</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">W_r</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">W_r</span><span class="p">)</span> <span class="o">@</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">W_r</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">W</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+
+<span class="c1"># apply the singular value decomposition on W</span>
+<span class="c1"># W = U x S x V^T</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+<span class="c1"># rank r factorization we only keep first r singular value from D and corresponding columns of S and V^T</span>
+<span class="n">U_r</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">W_r</span><span class="p">]</span>
+<span class="n">S_r</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">S</span><span class="p">[:</span><span class="n">W_r</span><span class="p">])</span>
+<span class="n">V_r</span> <span class="o">=</span> <span class="n">V</span><span class="p">[:,</span> <span class="p">:</span><span class="n">W_r</span><span class="p">]</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">S_r</span><span class="p">)</span>
+<span class="c1"># Computing A = U_r x S_r and B = V_r</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">U_r</span> <span class="o">@</span> <span class="n">S_r</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">V_r</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;shape of the A is : </span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;shape of the B is : </span><span class="si">{</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># let&#39;s generate the random bias and input </span>
+<span class="n">bias</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="c1"># computing straight line</span>
+<span class="c1"># y = W^Tx + bias</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">W</span> <span class="o">@</span> <span class="n">x</span> <span class="o">+</span> <span class="n">bias</span>
+<span class="c1"># compute y&#39; = (A * B) x + bias</span>
+<span class="n">y_prime</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">B</span><span class="p">)</span> <span class="o">@</span> <span class="n">x</span> <span class="o">+</span> <span class="n">bias</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;original y using W : </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;computed using BA: </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">y_prime</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># total params elements</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;total params of W : </span><span class="si">{</span><span class="n">W</span><span class="o">.</span><span class="n">nelement</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;total params of A and B: </span><span class="si">{</span><span class="n">B</span><span class="o">.</span><span class="n">nelement</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">A</span><span class="o">.</span><span class="n">nelement</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<pre><code>tensor([[-1.0797,  0.5545,  0.8058, -0.7140, -0.1518,  1.0773,  2.3690,  0.8486,
+         -1.1825, -3.2632],
+        [-0.3303,  0.2283,  0.4145, -0.1924, -0.0215,  0.3276,  0.7926,  0.2233,
+         -0.3422, -0.9614],
+        [-0.5256,  0.9864,  2.4447, -0.0290,  0.2305,  0.5000,  1.9831, -0.0311,
+         -0.3369, -1.1376],
+        [ 0.7900, -1.1336, -2.6746,  0.1988, -0.1982, -0.7634, -2.5763, -0.1696,
+          0.6227,  1.9294],
+        [ 0.1258,  0.1458,  0.5090,  0.1768,  0.1071, -0.1327, -0.0323, -0.2294,
+          0.2079,  0.5128],
+        [ 0.7697,  0.0050,  0.5725,  0.6870,  0.2783, -0.7818, -1.2253, -0.8533,
+          0.9765,  2.5786],
+        [ 1.4157, -0.7814, -1.2121,  0.9120,  0.1760, -1.4108, -3.1692, -1.0791,
+          1.5325,  4.2447],
+        [-0.0119,  0.6050,  1.7245,  0.2584,  0.2528, -0.0086,  0.7198, -0.3620,
+          0.1865,  0.3410],
+        [ 1.0485, -0.6394, -1.0715,  0.6485,  0.1046, -1.0427, -2.4174, -0.7615,
+          1.1147,  3.1054],
+        [ 0.9088,  0.1936,  1.2136,  0.8946,  0.4084, -0.9295, -1.2294, -1.1239,
+          1.2155,  3.1628]])
+2
+torch.Size([10, 10])
+tensor([[11.3851,  0.0000],
+        [ 0.0000,  4.8439]])
+shape of the A is : torch.Size([10, 2])
+shape of the B is : torch.Size([2, 10])
+original y using W : 
+ tensor([ 7.2684e+00,  2.3162e+00,  7.7151e+00, -1.0446e+01, -8.1639e-03,
+        -3.7270e+00, -1.1146e+01,  2.0207e+00, -9.6258e+00, -4.1163e+00])
+computed using BA: 
+ tensor([ 7.2684e+00,  2.3162e+00,  7.7151e+00, -1.0446e+01, -8.1638e-03,
+        -3.7270e+00, -1.1146e+01,  2.0207e+00, -9.6258e+00, -4.1163e+00])
+total params of W : 100
+total params of A and B: 40
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="output_8_0.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_prime</span><span class="p">)</span>
+</code></pre></div>
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x7f5099a09810&gt;]
+</code></pre>
+<p><img alt="png" src="output_9_1.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torchvision.datasets</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">datasets</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torchvision.transforms</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">transforms</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+</code></pre></div>
+<ol>
+<li>Training a NNs to classification of MNIST digits </li>
+<li>Fine-tuning the NNs on particular digit on which it does't perform well</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. data transformation pipeline </span>
+<span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span> 
+    <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.1307</span><span class="p">,),</span> <span class="p">(</span><span class="mf">0.3081</span><span class="p">,))</span>
+<span class="p">])</span>
+
+<span class="c1"># 2. loading the training dataset</span>
+<span class="n">mnist_train</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span>
+    <span class="n">root</span><span class="o">=</span><span class="s1">&#39;./dataset&#39;</span><span class="p">,</span>
+    <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">transform</span>
+<span class="p">)</span>
+
+<span class="c1"># creating the dataset loader for training</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">mnist_train</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># 3. loading the training dataset</span>
+<span class="n">mnist_test</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span>
+    <span class="n">root</span><span class="o">=</span><span class="s1">&#39;./dataset&#39;</span><span class="p">,</span>
+    <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+    <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">transform</span>
+<span class="p">)</span>
+
+<span class="c1"># creating the dataset loader for training</span>
+<span class="n">test_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">mnist_test</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda:0&#39;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</code></pre></div>
+<pre><code>cpu
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1"># NNs model for mnist digit classification</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NNClassifier</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hiddend_size1</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">hiddend_size2</span><span class="o">=</span><span class="mi">2000</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NNClassifier</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">,</span> <span class="n">hiddend_size1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hiddend_size1</span><span class="p">,</span> <span class="n">hiddend_size2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hiddend_size2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relu</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
+        <span class="c1"># Returns a new tensor with the same data as the self tensor but of a different shape .</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">NNClassifier</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()))</span>
+</code></pre></div>
+<pre><code>[Parameter containing:
+tensor([[-0.0217,  0.0324,  0.0245,  ...,  0.0251, -0.0153,  0.0165],
+        [-0.0317, -0.0023,  0.0119,  ..., -0.0138, -0.0319, -0.0170],
+        [-0.0331,  0.0294, -0.0160,  ..., -0.0044,  0.0223, -0.0177],
+        ...,
+        [-0.0239, -0.0275, -0.0241,  ..., -0.0318, -0.0332,  0.0283],
+        [-0.0185, -0.0276, -0.0083,  ..., -0.0080,  0.0042,  0.0142],
+        [-0.0156, -0.0187, -0.0276,  ..., -0.0276, -0.0033, -0.0178]],
+       requires_grad=True), Parameter containing:
+tensor([-1.0320e-02, -6.5207e-03, -3.0425e-02,  3.1773e-02,  2.3648e-02,
+         2.5797e-02, -5.3310e-03,  2.5184e-02,  2.8565e-02, -3.3112e-02,
+        -1.9557e-02,  7.6884e-03,  2.5767e-02,  1.1022e-02,  1.7873e-02,
+         3.6960e-03,  1.1287e-02, -5.3714e-03,  2.5341e-02,  6.2376e-03,
+        -7.9755e-04, -1.4545e-02, -2.8868e-02,  3.0665e-02, -1.6053e-02,
+         2.4567e-02, -3.2694e-02,  1.0266e-02, -1.8655e-02,  3.0986e-02,
+        -1.3568e-02,  3.4876e-02, -2.9578e-02,  2.7216e-02, -7.4883e-03,
+         3.3605e-02, -1.4872e-03, -2.3862e-02,  1.6431e-02,  3.0644e-03,
+        -2.5285e-02, -3.3244e-02, -3.1994e-02,  1.5422e-02, -1.2993e-02,
+         4.7316e-03, -7.7458e-03, -8.3012e-03,  2.4295e-02,  1.4463e-02,
+         3.0909e-02,  2.0509e-02, -9.2036e-03, -1.5312e-02, -4.0725e-03,
+        -2.4484e-02, -1.4136e-03,  3.1083e-02, -5.4835e-03, -2.4125e-02,
+        -1.4210e-02,  3.0606e-02, -1.4151e-03, -2.4470e-02,  2.0178e-02,
+        -1.6197e-02,  1.7226e-02, -2.5792e-02,  2.6234e-02, -3.2808e-02,
+        -5.0729e-03, -2.6916e-02,  2.6938e-02, -2.9573e-02,  2.2938e-02,
+        -1.9897e-02,  3.3008e-04,  5.4161e-03, -3.3391e-02,  2.9945e-02,
+        -1.7166e-02, -6.3009e-03,  2.0346e-02, -1.4461e-02,  1.8482e-02,
+         6.0949e-03, -7.5448e-03, -3.2886e-02,  2.1630e-02,  7.4188e-03,
+        -3.4950e-02, -8.3634e-03, -1.6844e-02,  2.0370e-02, -1.2094e-02,
+         3.1708e-02, -2.9223e-02,  1.4402e-02,  7.0865e-03, -1.5358e-02,
+         1.1856e-02,  3.1122e-02,  1.5203e-02, -1.8215e-03, -1.2824e-02,
+         1.0726e-02,  1.1917e-02, -1.0603e-02, -2.5398e-02,  1.4085e-02,
+         3.3672e-02,  2.1310e-02, -2.9447e-02,  9.3373e-03, -1.7143e-02,
+         1.7928e-02,  2.4010e-02,  3.1620e-03, -3.4073e-02, -1.7843e-04,
+         2.1446e-02, -5.7481e-03, -5.3269e-03,  2.2068e-02, -1.4882e-02,
+         2.1116e-02,  1.4975e-02,  3.0249e-02, -1.8176e-02, -2.0800e-02,
+        -3.2717e-02, -1.3635e-02, -2.2269e-03, -2.3452e-02,  6.2030e-03,
+        -3.7176e-03, -3.2942e-02,  1.6464e-02,  2.1308e-03,  9.1494e-03,
+         3.0661e-02, -1.0450e-02,  3.5434e-02, -1.0500e-02, -1.3349e-02,
+         6.4561e-03, -2.2488e-02, -1.9313e-02, -2.1507e-02,  2.9707e-02,
+        -1.0514e-03, -2.2687e-02,  1.6495e-02, -7.2441e-03,  9.0183e-03,
+         3.5323e-02,  2.3491e-02,  3.4227e-02, -3.5294e-02,  3.1196e-02,
+        -3.0435e-02, -1.8756e-03,  3.1710e-02, -2.5314e-02,  1.9563e-02,
+        -5.1431e-03, -2.2396e-02,  1.6726e-02,  2.7843e-02,  1.9943e-03,
+         9.1732e-03, -2.1799e-03,  1.3088e-02,  1.4959e-02, -1.8214e-02,
+        -2.5891e-02,  1.7134e-02, -1.3138e-02, -3.4261e-02, -2.4443e-03,
+         1.6028e-02,  9.3183e-03,  2.9106e-03, -1.4481e-02,  3.0286e-02,
+         8.1368e-03, -2.3945e-02,  1.9110e-02,  1.2722e-02, -2.6075e-03,
+        -2.9834e-02,  1.8304e-02, -3.1546e-02,  2.7695e-02,  3.7760e-03,
+         1.4670e-02, -6.9188e-03,  1.0402e-02, -9.1942e-03,  3.4181e-02,
+         2.2536e-02, -3.1036e-02,  3.3324e-02,  8.9956e-03, -3.4604e-02,
+         1.9387e-02,  1.8981e-02, -8.9051e-03,  3.0992e-02, -1.2215e-02,
+         2.0103e-02,  2.2554e-02, -3.3443e-02,  3.0147e-02,  1.9108e-02,
+        -2.4510e-02, -1.2634e-02, -2.1231e-02,  3.4975e-02,  2.0375e-02,
+         7.2947e-03,  4.3169e-03, -1.2881e-02, -1.3409e-02, -2.1335e-02,
+        -2.3977e-02,  2.3418e-02,  6.6731e-03,  3.4438e-02, -2.0304e-02,
+         3.2077e-03, -3.0646e-02, -2.4091e-02,  1.9362e-02, -3.6200e-03,
+        -2.1357e-02,  7.0748e-03,  2.3027e-02, -1.3675e-04,  1.2392e-02,
+        -3.3867e-02, -2.4129e-02, -2.3819e-02,  2.6258e-02,  7.8028e-03,
+        -1.3049e-02,  3.2535e-02,  1.7173e-02,  3.3982e-02,  1.2429e-02,
+         3.4691e-03, -3.6540e-03,  2.7349e-02,  1.3865e-02, -3.0865e-02,
+         2.5375e-04,  1.4413e-02,  1.8267e-02,  1.9683e-02,  2.0639e-02,
+         3.5192e-02,  3.5667e-03,  3.1047e-02, -2.9158e-03,  1.9225e-02,
+        -8.5528e-03,  3.1992e-02, -1.0818e-02, -2.1563e-02,  8.3119e-03,
+        -1.7559e-02,  2.6640e-02, -5.2229e-03, -2.5551e-02,  4.8802e-03,
+         1.4288e-02, -6.5380e-03,  2.4955e-02, -5.4183e-03, -1.4058e-02,
+         2.6932e-03,  3.3208e-02, -6.2700e-03, -1.5788e-02, -1.7684e-02,
+         2.9466e-02,  2.7513e-02,  2.9602e-02, -3.3953e-02,  3.5185e-02,
+        -2.7161e-02,  2.4324e-02, -3.3283e-02,  2.2554e-02, -5.0453e-03,
+         2.2500e-02,  2.1988e-02, -2.4596e-02, -1.3986e-02,  2.7671e-02,
+        -3.4754e-03, -1.2286e-02,  1.4984e-02, -4.4056e-03, -8.6189e-03,
+         2.7208e-02, -2.9294e-02,  1.6323e-02, -3.1894e-02, -3.9037e-03,
+        -3.3732e-02,  1.0061e-02,  2.4544e-02, -6.7358e-03,  2.8664e-02,
+         3.3990e-02,  2.9531e-02,  1.7360e-02, -3.0523e-03, -1.9472e-03,
+         3.5627e-02,  3.3541e-02, -3.4791e-02, -1.1263e-02, -1.1480e-02,
+        -2.3141e-02, -3.3590e-02,  1.1438e-02,  2.7258e-02,  2.4727e-02,
+        -3.0529e-02, -1.0583e-02, -2.0665e-02,  3.1055e-02, -5.0806e-03,
+        -2.0507e-02,  2.5286e-02, -1.3779e-03, -2.2157e-02,  6.1207e-03,
+         3.2355e-02, -1.8250e-02, -3.1861e-02, -9.3196e-03,  2.1641e-02,
+        -3.9089e-03,  3.4388e-03, -2.2020e-02, -4.4128e-03,  2.3871e-03,
+         3.2001e-02, -2.5075e-03,  2.8722e-02, -4.2344e-03, -2.9219e-02,
+         2.0086e-03,  1.5973e-02, -3.5049e-03,  2.1306e-02, -1.1166e-02,
+         2.0079e-02, -6.7300e-03, -2.6517e-04, -1.1985e-02, -1.7145e-02,
+         1.9042e-02,  2.2402e-02,  1.1510e-02, -2.1869e-02, -2.6135e-02,
+        -2.9119e-03,  1.1450e-02,  1.6710e-02,  4.8621e-03,  1.9973e-02,
+        -1.0327e-02, -2.5088e-02, -2.5622e-03, -3.3391e-02,  1.4364e-02,
+        -8.9138e-03,  1.4032e-02,  2.5126e-02, -1.6650e-02, -1.9333e-02,
+         2.2969e-03, -2.5163e-02, -2.5816e-02,  9.7195e-03,  1.2432e-02,
+        -2.8958e-02,  6.3350e-03,  3.3329e-02,  2.0824e-02, -1.2263e-02,
+        -1.0363e-02, -9.2727e-03, -2.2585e-02, -2.0626e-02,  1.9297e-02,
+         7.4085e-03,  1.7134e-03, -1.3231e-02,  2.3401e-02,  1.3387e-02,
+         3.1168e-02,  1.1417e-02,  1.5655e-02,  3.2483e-02, -2.0565e-02,
+        -1.7921e-02,  8.7170e-03, -3.4215e-02, -2.3987e-02,  2.6542e-02,
+        -3.4977e-02,  1.9865e-02, -8.3847e-03, -2.9331e-02,  1.5026e-02,
+        -3.4773e-02,  2.6966e-02,  2.7601e-02, -1.2405e-02,  1.7106e-02,
+        -3.0025e-03, -1.5765e-02, -2.2292e-02, -2.9382e-02,  1.4102e-02,
+        -5.2560e-03,  2.1957e-03, -2.1462e-02, -1.4539e-02, -1.0104e-02,
+        -2.3779e-02,  3.4817e-02,  3.5219e-02, -3.8881e-03, -6.7443e-03,
+        -2.3840e-02,  2.8530e-02,  2.9175e-02,  1.3148e-02, -1.1325e-02,
+        -1.1776e-02, -1.7442e-02, -1.2934e-02,  7.2415e-03, -1.9589e-02,
+        -1.4543e-02,  9.6600e-03,  1.3898e-02, -2.8426e-02,  4.4072e-03,
+         9.4081e-03,  1.6309e-03,  3.0097e-02, -1.1128e-02,  3.6528e-03,
+        -9.2725e-03,  1.3974e-02, -2.6080e-02,  2.0842e-02, -2.1798e-04,
+         1.6775e-02, -2.4995e-02, -2.8316e-02, -1.4493e-02, -2.8528e-02,
+         2.5058e-02, -8.3217e-03, -3.3703e-02, -4.7767e-03, -2.3862e-02,
+        -2.0058e-02,  3.2306e-02,  2.9167e-02, -1.4795e-02,  5.3299e-03,
+        -2.5088e-02,  1.2088e-02, -2.5961e-02, -7.5826e-03, -3.0156e-02,
+        -1.8749e-02, -2.6915e-02, -2.9662e-03, -8.0834e-03,  2.6074e-02,
+         2.1337e-02,  3.3836e-02, -1.4253e-02,  2.5713e-02,  1.0277e-02,
+         2.6883e-02,  2.5550e-02,  7.3263e-04, -2.1505e-02, -2.9476e-02,
+         1.7300e-02, -9.2658e-04, -2.6885e-02,  3.1527e-02, -3.1505e-02,
+         1.6972e-03,  3.9439e-03, -1.3458e-02,  2.0468e-02, -1.3039e-02,
+        -2.6961e-02,  2.1360e-02, -1.9148e-02,  9.4469e-03,  3.8634e-03,
+         1.5208e-02, -3.4737e-02,  2.8281e-02,  1.1064e-02,  8.2391e-03,
+         3.2464e-02, -1.1658e-02,  1.3489e-02, -1.7283e-02,  2.2119e-02,
+        -3.4424e-02,  2.5421e-02, -1.2789e-02,  2.9809e-02,  1.0789e-02,
+         2.3867e-02, -3.5295e-02,  2.3215e-02,  1.9149e-02, -2.4315e-02,
+        -2.5146e-02, -8.6107e-04, -5.0835e-03, -1.8575e-02, -2.6215e-02,
+        -2.7810e-02,  2.5646e-02,  3.0134e-02, -3.0501e-02, -2.9124e-02,
+        -8.9983e-03,  3.3040e-02,  3.3356e-02, -1.9703e-02,  1.0565e-02,
+        -2.8867e-02, -1.3825e-02, -3.0619e-02,  2.5332e-02,  2.1241e-03,
+        -3.4285e-02,  9.5266e-03, -9.6307e-03, -3.0483e-02, -8.1293e-04,
+        -1.9215e-02, -2.6393e-02,  1.0839e-02,  1.7522e-02,  1.2732e-02,
+         2.4161e-03,  3.2747e-03, -2.7306e-02, -1.6981e-02, -2.5289e-02,
+         1.4391e-02,  1.5814e-02, -3.2952e-02,  8.5922e-03, -1.8989e-02,
+         2.6121e-02,  2.6907e-02, -2.3459e-02, -1.6141e-02, -3.3371e-02,
+        -2.6357e-03,  2.4567e-02, -7.7612e-03, -2.1023e-02,  2.5129e-02,
+         2.1122e-02, -8.7298e-03, -1.4417e-02, -3.4422e-05, -3.5433e-03,
+        -2.5052e-02, -6.2602e-03,  1.9767e-02,  2.8703e-02,  2.2393e-02,
+        -2.6030e-02,  2.7101e-02,  2.2300e-02, -8.3532e-03, -2.9488e-02,
+         1.3485e-02,  4.4590e-03,  2.7863e-02, -4.9552e-03, -1.2408e-02,
+         2.1340e-02,  3.3019e-02, -2.0870e-02, -1.0793e-02, -1.7556e-02,
+        -1.8153e-02, -2.9978e-02, -1.5054e-04, -7.9508e-03, -2.0383e-02,
+         1.8043e-03, -2.5907e-02,  2.1147e-03, -5.1263e-03, -8.3881e-03,
+        -9.3727e-04, -2.5783e-02, -6.2917e-03, -2.2286e-02,  7.0261e-03,
+        -2.6878e-02, -3.3122e-02,  2.7937e-02,  1.0864e-02,  2.6594e-02,
+        -1.1931e-02,  5.8170e-03,  2.6352e-02,  1.2630e-02, -9.7866e-03,
+        -1.6081e-04, -1.4795e-03,  2.5824e-02,  2.9091e-02,  1.1263e-02,
+         1.0342e-02,  8.4446e-03,  3.1705e-02,  1.8338e-02, -1.8277e-02,
+         8.5916e-04, -2.4103e-02,  1.7859e-02, -9.5928e-03,  1.3742e-02,
+        -8.9115e-03,  1.4277e-02,  3.5388e-02, -1.7607e-02, -1.4693e-02,
+        -9.8005e-03,  4.3073e-05, -3.3865e-02,  1.0280e-02,  1.5807e-02,
+         1.5070e-02, -1.6566e-02,  1.7564e-02, -2.7704e-02, -2.2590e-02,
+         8.8178e-03, -1.7540e-02,  2.6702e-02, -3.1916e-03,  1.7622e-02,
+        -7.6404e-03,  2.8830e-02, -1.3591e-02,  2.4009e-02,  1.5386e-02,
+         6.9780e-03,  1.8959e-02,  8.2545e-03, -6.6080e-03, -3.2939e-02,
+         2.8128e-02, -1.7068e-02,  5.5168e-04, -5.2053e-03, -2.9445e-02,
+         3.1236e-02,  1.9677e-02, -4.3910e-03, -3.2076e-02,  1.0516e-02,
+        -3.1377e-02,  1.9781e-02,  3.1435e-02,  2.1929e-02,  1.3153e-02,
+        -2.6972e-02,  2.1385e-02,  3.4706e-02,  1.4306e-02, -5.6461e-03,
+         2.7818e-02,  5.8553e-03,  1.9443e-02,  2.9906e-02, -2.3895e-02,
+        -4.4953e-03,  3.4025e-02, -2.7327e-02,  7.5911e-03, -1.0696e-02,
+        -1.5784e-02, -3.3610e-02,  2.1257e-02, -8.0741e-03, -2.5527e-02,
+        -2.9305e-02, -6.2372e-03,  6.2000e-03, -6.2799e-03,  2.2755e-02,
+        -3.3834e-03, -8.0613e-03, -1.8107e-02,  4.3210e-03, -6.5641e-03,
+        -2.9937e-02, -1.0537e-02, -1.7394e-02,  3.1030e-02, -3.5578e-02,
+        -7.2662e-03, -4.8714e-03, -2.2475e-02, -5.1476e-03, -1.6219e-02,
+         1.8819e-03, -2.7253e-02,  2.8513e-02, -2.1133e-02,  2.4286e-02,
+        -1.1441e-02,  1.7717e-02,  3.2361e-03,  2.7704e-02, -2.1761e-02,
+        -2.2392e-02,  3.1089e-02,  2.9018e-02,  3.0272e-02, -6.8205e-03,
+        -2.5453e-02,  2.3631e-02, -2.0008e-02, -1.3758e-02, -3.0179e-02,
+         9.0209e-03,  3.5342e-02,  1.8764e-02, -2.9572e-03,  1.4037e-02,
+        -2.5208e-02, -7.9729e-03, -3.3988e-02, -2.0911e-02,  2.1514e-02,
+         3.1382e-02,  6.7151e-03, -9.3605e-03,  2.7419e-02,  6.9611e-03,
+        -1.8635e-02,  3.1656e-02, -1.4793e-02,  2.3778e-03, -1.7655e-02,
+        -3.4396e-02, -1.3742e-02,  3.0899e-02,  8.0773e-03,  2.6538e-02,
+        -1.9777e-02, -9.0255e-03,  1.1360e-02,  1.3888e-02,  1.7534e-02,
+         3.1802e-02, -3.1403e-02,  2.4403e-02, -9.1145e-03,  1.8790e-02,
+        -1.3794e-02,  6.3013e-03, -9.9022e-04,  5.3809e-03, -4.6361e-04,
+         1.2676e-02, -2.3639e-02,  3.1625e-02, -2.5981e-02, -3.2198e-02,
+         1.5652e-02,  1.8372e-02, -2.6063e-02,  1.2784e-02, -8.7744e-03,
+        -3.2363e-02, -1.1799e-02, -2.8773e-03,  3.6047e-03,  3.3369e-02,
+         1.8367e-02, -4.9440e-03, -2.5065e-02, -2.4709e-02, -1.0674e-02,
+        -2.2570e-02, -1.0224e-02, -1.2301e-02, -1.2572e-02,  6.1015e-03,
+         2.5827e-02, -2.7389e-02,  8.3895e-03, -1.4418e-02,  2.3136e-02,
+         1.8191e-03, -9.2161e-03, -1.1298e-02, -3.5630e-02, -9.3792e-03,
+        -1.6237e-02, -1.5355e-02, -3.5711e-02,  4.5125e-03, -4.9696e-03,
+         2.7394e-03, -7.9843e-03,  1.4771e-02, -2.9733e-02, -1.8549e-03,
+         1.6829e-02,  3.3979e-02,  9.2009e-03, -1.2639e-02, -3.4870e-02,
+        -2.8328e-02,  2.7494e-03, -3.5614e-02, -3.2945e-02,  3.1098e-03,
+        -1.7553e-03, -2.7198e-02, -4.6992e-04,  2.2827e-02,  2.8319e-02,
+        -5.5863e-03, -2.9454e-02, -1.0707e-02, -2.1160e-02,  6.5313e-03,
+        -1.6470e-02,  1.3873e-02,  2.9606e-02, -1.9141e-02, -1.2932e-02,
+        -1.1128e-02, -2.7259e-02, -8.5404e-03,  1.4063e-03, -1.5799e-02,
+        -5.2531e-04,  6.8968e-03, -3.2139e-02, -2.1133e-02,  5.9622e-04,
+        -2.4588e-02,  2.4882e-02, -2.0747e-02,  3.2070e-02, -1.7916e-02,
+        -3.1254e-02,  7.4483e-03, -2.6131e-02,  2.1663e-02, -1.9201e-02,
+         1.8842e-02, -7.4075e-03,  7.4798e-03, -2.9741e-02,  8.1354e-03,
+        -2.7016e-02,  2.3997e-02,  2.4825e-02,  3.3629e-02,  2.5536e-02,
+        -1.3840e-02, -2.8280e-02, -2.0921e-02,  9.3194e-04,  7.7197e-03,
+        -1.5052e-02, -6.9257e-03,  3.1434e-02,  1.7373e-04,  1.4073e-02,
+         2.0773e-02,  1.4547e-02, -8.5811e-03, -2.3977e-02, -3.3969e-02,
+         3.0125e-02, -6.3217e-03, -2.1554e-02,  2.5343e-02, -2.9926e-02,
+        -2.3997e-03,  3.9591e-03, -5.7528e-03,  3.4311e-02,  1.6726e-02,
+         1.7948e-02, -3.3646e-02, -2.2943e-02, -1.5972e-02, -3.4631e-02,
+         9.5554e-03, -1.9555e-02, -2.2307e-02, -7.5593e-03, -5.3825e-03,
+        -1.4440e-02, -1.5396e-02,  2.6183e-02, -2.9610e-02,  1.3939e-02,
+        -1.1712e-02, -1.1865e-02,  3.0449e-02,  2.1924e-02,  2.5383e-03,
+        -1.2323e-02,  1.2927e-02, -1.1346e-02,  9.4067e-03,  7.2429e-03,
+        -1.9180e-02, -3.7484e-03, -2.7377e-02, -1.2778e-02, -2.9293e-02,
+         2.1381e-02,  2.7661e-02,  3.4644e-02, -1.4897e-02, -1.9537e-02,
+         6.6081e-03,  1.4900e-02, -7.8494e-03,  1.8571e-02,  1.7224e-02,
+        -1.4418e-02, -3.3899e-02, -2.1095e-02, -2.1899e-02, -1.3322e-02,
+        -2.4567e-02, -1.7855e-02, -1.4534e-02,  1.5108e-02, -8.2170e-03,
+        -2.1554e-02,  2.1186e-02,  8.7807e-03,  3.2396e-02, -5.4814e-03,
+         1.1285e-02, -2.0407e-02,  1.3838e-02,  1.7412e-02,  6.5471e-04,
+         2.2826e-02,  2.5913e-02, -1.3132e-02,  2.4417e-02,  3.7038e-03,
+        -3.1471e-02,  3.5355e-02,  1.0973e-03,  5.5835e-03,  9.1416e-03,
+         1.3847e-02,  2.7203e-02,  2.6725e-02,  2.8856e-02,  1.4015e-03,
+         2.8019e-02, -2.5718e-02, -6.4135e-03,  1.3450e-02,  2.1297e-02],
+       requires_grad=True), Parameter containing:
+tensor([[ 2.7064e-02, -1.3890e-02,  1.2426e-02,  ...,  1.6834e-02,
+         -2.2114e-02, -1.2481e-03],
+        [ 8.6761e-04, -2.9554e-02,  1.0315e-02,  ..., -1.0449e-03,
+          2.7714e-02, -1.7915e-02],
+        [-4.0925e-03,  1.9115e-02, -2.9762e-02,  ...,  1.9335e-02,
+          2.7546e-02,  1.9274e-02],
+        ...,
+        [-1.8041e-02, -1.8621e-02,  1.5718e-02,  ..., -1.9459e-02,
+         -1.5317e-02, -6.8762e-03],
+        [ 2.0010e-03,  5.0789e-03, -6.4813e-03,  ..., -2.7187e-05,
+          1.8645e-02,  3.6312e-03],
+        [-1.2214e-02, -7.0958e-03,  2.7411e-02,  ...,  1.2113e-03,
+         -3.0699e-02,  1.4975e-02]], requires_grad=True), Parameter containing:
+tensor([ 0.0277, -0.0068, -0.0157,  ..., -0.0305,  0.0262, -0.0049],
+       requires_grad=True), Parameter containing:
+tensor([[ 0.0028, -0.0114,  0.0146,  ..., -0.0143,  0.0011,  0.0098],
+        [-0.0015, -0.0114, -0.0172,  ..., -0.0144, -0.0206,  0.0201],
+        [ 0.0171, -0.0212,  0.0021,  ..., -0.0209, -0.0052, -0.0055],
+        ...,
+        [-0.0084, -0.0177,  0.0097,  ..., -0.0002, -0.0125,  0.0055],
+        [ 0.0217,  0.0042,  0.0052,  ..., -0.0189, -0.0043, -0.0173],
+        [ 0.0069,  0.0023,  0.0138,  ...,  0.0218,  0.0053,  0.0042]],
+       requires_grad=True), Parameter containing:
+tensor([-0.0203, -0.0220,  0.0044, -0.0117, -0.0069,  0.0038,  0.0209, -0.0037,
+        -0.0203,  0.0065], requires_grad=True)]
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">training</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">iter_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># loss function and optimizer</span>
+    <span class="n">loss_fun</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+
+    <span class="n">iter_total</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+        <span class="n">loss_sum</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">iter_num</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">data_iter</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">iter_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">data_iter</span><span class="o">.</span><span class="n">total</span> <span class="o">=</span> <span class="n">iter_limit</span>
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">data_iter</span><span class="p">:</span>
+            <span class="n">iter_num</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">iter_total</span> <span class="o">+=</span><span class="mi">1</span>
+
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+            <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">))</span>
+            <span class="n">loss</span>  <span class="o">=</span> <span class="n">loss_fun</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+
+            <span class="n">loss_sum</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+            <span class="n">avg_loss</span> <span class="o">=</span> <span class="n">loss_sum</span> <span class="o">/</span> <span class="n">iter_num</span>
+
+            <span class="n">data_iter</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="n">avg_loss</span><span class="p">)</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">iter_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">iter_total</span> <span class="o">&gt;=</span> <span class="n">iter_limit</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">avg_loss</span>
+    <span class="k">return</span> <span class="n">avg_loss</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">training</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<pre><code>Epoch 1: 100%|██████████| 6000/6000 [01:43&lt;00:00, 58.11it/s, loss=0.24]
+
+
+
+
+
+0.24042963718108756
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1"># make a copy of the original model&#39;s weight, we use it to prive that LoRA fine-tuning does&#39;t alter the original weights</span>
+<span class="n">org_weights</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">():</span>
+    <span class="n">org_weights</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># the performance of  NNClassifier model</span>
+<span class="c1"># It poorly performed on digit 2</span>
+<span class="c1"># so we will fine-tune the model for digit 2</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test</span><span class="p">():</span>
+    <span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">wrong_counts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">test_loader</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Testing&#39;</span><span class="p">):</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span> 
+            <span class="n">x</span>  <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+            <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span>
+                   <span class="n">correct</span> <span class="o">+=</span><span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">wrong_counts</span><span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">]]</span> <span class="o">+=</span><span class="mi">1</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy:</span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">correct</span><span class="o">/</span><span class="n">total</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">wrong_counts</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wrong count for digit </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">wrong_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">test</span><span class="p">()</span>
+</code></pre></div>
+<pre><code>Testing: 100%|██████████| 1000/1000 [00:00&lt;00:00, 1041.01it/s]
+
+Accuracy:0.959
+Wrong count for digit 0: 10
+Wrong count for digit 1: 11
+Wrong count for digit 2: 103
+Wrong count for digit 3: 37
+Wrong count for digit 4: 57
+Wrong count for digit 5: 38
+Wrong count for digit 6: 19
+Wrong count for digit 7: 70
+Wrong count for digit 8: 37
+Wrong count for digit 9: 33
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1"># How many parameters are in the our model(NNClassifier) ?</span>
+<span class="c1"># 1. print the size of weight matrix of the NNs</span>
+<span class="c1"># 2. save the count of total number of parameters</span>
+<span class="n">total_params_org</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">index</span> <span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">model</span><span class="o">.</span><span class="n">fc1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">fc2</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">fc3</span><span class="p">]):</span>
+    <span class="n">total_params_org</span> <span class="o">+=</span> <span class="n">layer</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">nelement</span><span class="p">()</span> <span class="o">+</span> <span class="n">layer</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">nelement</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Layer </span><span class="si">{</span><span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1"> - W : </span><span class="si">{</span><span class="n">layer</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> + B: </span><span class="si">{</span><span class="n">layer</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total number of parameters: </span><span class="si">{</span><span class="n">total_params_org</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<pre><code>Layer 1 - W : torch.Size([1000, 784]) + B: torch.Size([1000])
+Layer 2 - W : torch.Size([2000, 1000]) + B: torch.Size([2000])
+Layer 3 - W : torch.Size([10, 2000]) + B: torch.Size([10])
+Total number of parameters: 2807010
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">LoRaParameterization</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+   <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features_in</span><span class="p">,</span> <span class="n">features_out</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;cpu&#39;</span><span class="p">):</span>
+      <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+      <span class="c1"># random gaussian initialization for a and zero for B</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">features_out</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+      <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">features_in</span><span class="p">,</span> <span class="n">rank</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+      <span class="c1"># scale ∆Wx by α/r , where α is a constant in r.</span>
+      <span class="c1"># When optimizing with adam, tuning α is roughly the same as tuning the learning rate if we scale the initialization appropriately.</span>
+      <span class="c1">#   as a result, we simply set α to the first r we try and do not tune it.</span>
+      <span class="c1">#   This scaling helps to reduce the need to retune hyperparameters when we vary r.</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">/</span> <span class="n">rank</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">True</span>
+   <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">org_weights</span><span class="p">):</span>
+      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
+         <span class="k">return</span> <span class="n">org_weights</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">org_weights</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+         <span class="k">return</span> <span class="n">org_weights</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># addition of the parameters to our NNs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.utils.parametrize</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">parametrize</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">LinearLayerParameterization</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lora_alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># we only add parameterization to the weight matrix and ignore the bias</span>
+    <span class="c1"># We limit our study to only adapting the attention weights for downstream tasks and freeze the MLP modules (so they are not trained in downstream tasks) both for simplicity and parameter-efficiency.</span>
+    <span class="c1"># We leave the emphirical investigation of [...] and biases to a future work</span>
+
+    <span class="n">features_in</span><span class="p">,</span> <span class="n">features_out</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="k">return</span> <span class="n">LoRAParameterization</span><span class="p">(</span>
+        <span class="n">features_in</span><span class="p">,</span>
+        <span class="n">features_out</span><span class="p">,</span>
+        <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="n">lora_alpha</span><span class="p">,</span>
+        <span class="n">device</span><span class="o">=</span><span class="n">device</span>
+    <span class="p">)</span>
+
+<span class="n">parametrize</span><span class="o">.</span><span class="n">register_parametrization</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fc1</span><span class="p">,</span> 
+    <span class="s2">&quot;weight&quot;</span><span class="p">,</span>
+    <span class="n">LinearLayerParameterization</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">fc1</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">parametrize</span><span class="o">.</span><span class="n">register_parametrization</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fc2</span><span class="p">,</span> 
+    <span class="s2">&quot;weight&quot;</span><span class="p">,</span>
+    <span class="n">LinearLayerParameterization</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">fc2</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">parametrize</span><span class="o">.</span><span class="n">register_parametrization</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fc3</span><span class="p">,</span> 
+    <span class="s2">&quot;weight&quot;</span><span class="p">,</span>
+    <span class="n">LinearLayerParameterization</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">fc3</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">EnableDesableLoRA</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="p">[</span><span class="n">model</span><span class="o">.</span><span class="n">fc1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">fc2</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">fc3</span><span class="p">]:</span>
+        <span class="n">layer</span><span class="o">.</span><span class="n">parameterization</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="n">enabled</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">total_param_lora</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total_param_non_lora</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">model</span><span class="o">.</span><span class="n">fc1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">fc2</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">fc3</span><span class="p">]):</span>
+    <span class="n">total_param_lora</span> <span class="o">+=</span> <span class="n">layer</span><span class="o">.</span><span class="n">parametrizations</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">nelement</span><span class="p">()</span> <span class="o">+</span> <span class="n">layer</span><span class="o">.</span><span class="n">parametrizations</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">nelement</span><span class="p">()</span>
+    <span class="n">total_param_non_lora</span> <span class="o">+=</span> <span class="n">layer</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">nelement</span><span class="p">()</span> <span class="o">+</span> <span class="n">layer</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">nelement</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+       <span class="sa">f</span><span class="s1">&#39;Layer </span><span class="si">{</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">: W: </span><span class="si">{</span><span class="n">layer</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> + Bias: </span><span class="si">{</span><span class="n">layer</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> + Lora_A: </span><span class="si">{</span><span class="n">layer</span><span class="o">.</span><span class="n">parametrizations</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> + Lora_B: </span><span class="si">{</span><span class="n">layer</span><span class="o">.</span><span class="n">parametrizations</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+
+
+<span class="c1"># The non-LoRA param count must match the original network</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total number of param (original): </span><span class="si">{</span><span class="n">total_param_non_lora</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total number of param (original + LoRA): </span><span class="si">{</span><span class="n">total_param_lora</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">total_param_non_lora</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Param introduced by LoRA: </span><span class="si">{</span><span class="n">total_param_lora</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">param_incremment</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_param_lora</span> <span class="o">/</span> <span class="n">total_param_non_lora</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Param incremment: </span><span class="si">{</span><span class="n">param_incremment</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+</code></pre></div>
+<pre><code>Layer 1: W: torch.Size([1000, 784]) + Bias: torch.Size([1000]) + Lora_A: torch.Size([1, 784]) + Lora_B: torch.Size([1000, 1])
+Layer 2: W: torch.Size([2000, 1000]) + Bias: torch.Size([2000]) + Lora_A: torch.Size([1, 1000]) + Lora_B: torch.Size([2000, 1])
+Layer 3: W: torch.Size([10, 2000]) + Bias: torch.Size([10]) + Lora_A: torch.Size([1, 2000]) + Lora_B: torch.Size([10, 1])
+Total number of param (original): 5,608,000
+Total number of param (original + LoRA): 5,614,794
+Param introduced by LoRA: 6,794
+Param incremment: 0.121%
+</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Freeze all params of the original model</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s1">&#39;lora&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Freezing Original params of models :  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span><span class="o">=</span><span class="kc">False</span>
+
+
+
+<span class="c1"># 2. Finetuning the models params that introduced by LoRA on training digit 2</span>
+<span class="c1"># let&#39;s load the mnist data set and keeping only the digit 2</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span>
+    <span class="s1">&#39;./dataset&#39;</span><span class="p">,</span>
+    <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="n">exclud_idx</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">train</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">exclud_idx</span><span class="p">]</span>
+<span class="n">train</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">targets</span><span class="p">[</span><span class="n">exclud_idx</span><span class="p">]</span>
+
+<span class="c1"># creating the dataloader for the training</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">train</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">suffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Train the network with LoRA only on the digit 2 and only for 100 batches (hoping that it would improve the performance on the digit 9)</span>
+<span class="n">train</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">total_iterations_limit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verify that the fine-tuning didn&#39;t alter the original weights, but only the ones introduced by LoRA.</span>
+<span class="c1"># Check that the frozen parameters are still unchanged by the finetuning</span>
+<span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">linear1</span><span class="o">.</span><span class="n">parametrizations</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">original</span> <span class="o">==</span> <span class="n">original_weights</span><span class="p">[</span><span class="s1">&#39;linear1.weight&#39;</span><span class="p">])</span>
+<span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">linear2</span><span class="o">.</span><span class="n">parametrizations</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">original</span> <span class="o">==</span> <span class="n">original_weights</span><span class="p">[</span><span class="s1">&#39;linear2.weight&#39;</span><span class="p">])</span>
+<span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">linear3</span><span class="o">.</span><span class="n">parametrizations</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">original</span> <span class="o">==</span> <span class="n">original_weights</span><span class="p">[</span><span class="s1">&#39;linear3.weight&#39;</span><span class="p">])</span>
+
+<span class="n">enable_disable_lora</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># The new linear1.weight is obtained by the &quot;forward&quot; function of our LoRA parametrization</span>
+<span class="c1"># The original weights have been moved to net.linear1.parametrizations.weight.original</span>
+<span class="c1"># More info here: https://pytorch.org/tutorials/intermediate/parametrizations.html#inspecting-a-parametrized-module</span>
+<span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">linear1</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">net</span><span class="o">.</span><span class="n">linear1</span><span class="o">.</span><span class="n">parametrizations</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">original</span> <span class="o">+</span> <span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">linear1</span><span class="o">.</span><span class="n">parametrizations</span><span class="o">.</span><span class="n">weight</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lora_B</span> <span class="o">@</span> <span class="n">net</span><span class="o">.</span><span class="n">linear1</span><span class="o">.</span><span class="n">parametrizations</span><span class="o">.</span><span class="n">weight</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lora_A</span><span class="p">)</span> <span class="o">*</span> <span class="n">net</span><span class="o">.</span><span class="n">linear1</span><span class="o">.</span><span class="n">parametrizations</span><span class="o">.</span><span class="n">weight</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scale</span><span class="p">)</span>
+
+<span class="n">enable_disable_lora</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># If we disable LoRA, the linear1.weight is the original one</span>
+<span class="k">assert</span> <span class="n">torch</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">linear1</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">original_weights</span><span class="p">[</span><span class="s1">&#39;linear1.weight&#39;</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#Test the network with LoRA enabled (the digit 9 should be classified better)</span>
+<span class="c1"># Test with LoRA enabled</span>
+<span class="n">enable_disable_lora</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test</span><span class="p">()</span>
+<span class="c1"># Test the network with LoRA disabled (the accuracy and errors counts must be the same as the original network)</span>
+<span class="c1"># Test with LoRA disabled</span>
+<span class="n">enable_disable_lora</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">test</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">⚓︎</a></h2>
+<ol>
+<li>https://huggingface.co/EleutherAI/gpt-neo-125m</li>
+<li>https://huggingface.co/google-t5/t5-small</li>
+<li>https://huggingface.co/datasets/stanfordnlp/imdb</li>
+</ol>
+<h2 id="tutorials">Tutorials<a class="headerlink" href="#tutorials" title="Permanent link">⚓︎</a></h2>
+<ol>
+<li>Problem : https://colab.research.google.com/drive/1TyF-FmHN1Yd72qdaX-Z_a6kpcvWmH1FP?usp=sharing#scrollTo=_8C1P8OnezTP</li>
+<li>Solutions : https://colab.research.google.com/drive/1t0FqAqS2m3eGHsSKlQnlidgrW4IcHjCw?usp=sharing#scrollTo=X7Eb4LrVzUM0</li>
+<li>
+<p>Summer School : https://colab.research.google.com/drive/1OkqcpLVbze_obiomPakArA5kabWbn3lO#scrollTo=kKGxLfu0wS-U</p>
+</li>
+<li>
+<p>HandsOn Tutorial Notebook by Prof. Ashutosh Modi: https://tinyurl.com/PEFT-HandsOn-Sol</p>
+</li>
+<li>Huggingface PEFT Library: https://github.com/huggingface/peft/tree/main</li>
+<li>LoRA Paper: https://arxiv.org/pdf/2106.09685</li>
+<li>LoRA Explanation by Umar Jamil - https://www.youtube.com/watch?v=PXWYUTMt-AU</li>
+<li>QLoRA Paper: https://arxiv.org/pdf/2305.14314</li>
+<li>OLoRA Paper Explained: https://www.youtube.com/watch?v=6l8GZDPbFn8</li>
+<li>PEFT Hugging Face : https://huggingface.co/blog/samuellimabraz/peft-methods</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../lab-prompting/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lab-111 : LLM Prompting">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Lab-111 : LLM Prompting
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../lab-Scipy-Optimize/" class="md-footer__link md-footer__link--next" aria-label="Next: Optimization using Scipy i.e scipy.optimize">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Optimization using Scipy i.e scipy.optimize
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Ajeet Kumar
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://ajeetkbhardwaj.github.io/" target="_blank" rel="noopener" title="ajeetkbhardwaj.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/ajeetkumar09/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
