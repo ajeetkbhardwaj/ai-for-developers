@@ -9,25 +9,25 @@
       
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../../fastapi/fast/">
       
       
-        <link rel="next" href="../Linear_Transformations/">
+        <link rel="next" href="../../tensorflow/tensor/">
       
       
-      <link rel="icon" href="../../assets/favicon.jpg">
+      <link rel="icon" href="../../../assets/favicon.jpg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
-        <title>Eigen Value and Vecotr - AI-for-Developers</title>
+        <title>Keras - AI-for-Developers</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,7 +46,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -71,11 +71,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#eigen-value-and-vecotr" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -88,7 +83,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="AI-for-Developers" class="md-header__button md-logo" aria-label="AI-for-Developers" data-md-component="logo">
+    <a href="../../.." title="AI-for-Developers" class="md-header__button md-logo" aria-label="AI-for-Developers" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14.27 10.64 13A11.24 11.24 0 0 0 5 10.18v6.95c2.61.34 5 1.34 7 2.82 2-1.48 4.39-2.48 7-2.82v-6.95c-2.16.39-4.09 1.39-5.64 2.82M19 8.15c.65-.1 1.32-.15 2-.15v11c-3.5 0-6.64 1.35-9 3.54C9.64 20.35 6.5 19 3 19V8c.68 0 1.35.05 2 .15 2.69.41 5.1 1.63 7 3.39 1.9-1.76 4.31-2.98 7-3.39M12 6c.27 0 .5-.1.71-.29.19-.21.29-.44.29-.71s-.1-.5-.29-.71C12.5 4.11 12.27 4 12 4s-.5.11-.71.29c-.18.21-.29.45-.29.71s.11.5.29.71c.21.19.45.29.71.29m2.12 1.12a2.997 2.997 0 1 1-4.24-4.24 2.997 2.997 0 1 1 4.24 4.24"/></svg>
@@ -108,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Eigen Value and Vecotr
+              Keras
             
           </span>
         </div>
@@ -213,7 +208,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -230,13 +225,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../def/Eigenvalue_and_Eigenvector/" class="md-tabs__link">
           
   
   
@@ -258,7 +251,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../notebook/lab-prompting/" class="md-tabs__link">
+        <a href="../../../notebook/lab-prompting/" class="md-tabs__link">
           
   
   
@@ -276,11 +269,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../frameworks/pytorch/ch1pytorchIntro/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../pytorch/ch1pytorchIntro/" class="md-tabs__link">
           
   
   
@@ -322,7 +317,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="AI-for-Developers" class="md-nav__button md-logo" aria-label="AI-for-Developers" data-md-component="logo">
+    <a href="../../.." title="AI-for-Developers" class="md-nav__button md-logo" aria-label="AI-for-Developers" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 14.27 10.64 13A11.24 11.24 0 0 0 5 10.18v6.95c2.61.34 5 1.34 7 2.82 2-1.48 4.39-2.48 7-2.82v-6.95c-2.16.39-4.09 1.39-5.64 2.82M19 8.15c.65-.1 1.32-.15 2-.15v11c-3.5 0-6.64 1.35-9 3.54C9.64 20.35 6.5 19 3 19V8c.68 0 1.35.05 2 .15 2.69.41 5.1 1.63 7 3.39 1.9-1.76 4.31-2.98 7-3.39M12 6c.27 0 .5-.1.71-.29.19-.21.29-.44.29-.71s-.1-.5-.29-.71C12.5 4.11 12.27 4 12 4s-.5.11-.71.29c-.18.21-.29.45-.29.71s.11.5.29.71c.21.19.45.29.71.29m2.12 1.12a2.997 2.997 0 1 1-4.24-4.24 2.997 2.997 0 1 1 4.24 4.24"/></svg>
@@ -352,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -371,10 +366,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -388,22 +381,19 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
@@ -416,7 +406,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Definition
@@ -427,32 +417,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Eigen Value and Vecotr
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../def/Eigenvalue_and_Eigenvector/" class="md-nav__link">
         
   
   
@@ -463,35 +431,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#faddeev-leverrier-algorithm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Faddeev-LeVerrier Algorithm
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -504,7 +443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Linear_Transformations/" class="md-nav__link">
+      <a href="../../../def/Linear_Transformations/" class="md-nav__link">
         
   
   
@@ -527,7 +466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../MatrixComputation/" class="md-nav__link">
+      <a href="../../../def/MatrixComputation/" class="md-nav__link">
         
   
   
@@ -608,7 +547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../notebook/lab-prompting/" class="md-nav__link">
+      <a href="../../../notebook/lab-prompting/" class="md-nav__link">
         
   
   
@@ -631,7 +570,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../notebook/lab-peft-from-scratch/" class="md-nav__link">
+      <a href="../../../notebook/lab-peft-from-scratch/" class="md-nav__link">
         
   
   
@@ -654,7 +593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../notebook/lab-Scipy-Optimize/" class="md-nav__link">
+      <a href="../../../notebook/lab-Scipy-Optimize/" class="md-nav__link">
         
   
   
@@ -681,8 +620,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -698,19 +639,22 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -723,7 +667,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Frameworks
@@ -737,7 +681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../frameworks/pytorch/ch1pytorchIntro/" class="md-nav__link">
+      <a href="../../pytorch/ch1pytorchIntro/" class="md-nav__link">
         
   
   
@@ -760,7 +704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../frameworks/fastapi/fast/" class="md-nav__link">
+      <a href="../../fastapi/fast/" class="md-nav__link">
         
   
   
@@ -780,10 +724,17 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../frameworks/keras/keras/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -794,6 +745,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -806,7 +758,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../frameworks/tensorflow/tensor/" class="md-nav__link">
+      <a href="../../tensorflow/tensor/" class="md-nav__link">
         
   
   
@@ -846,25 +798,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#faddeev-leverrier-algorithm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Faddeev-LeVerrier Algorithm
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -883,21 +816,9 @@
   
 
 
-<h1 id="eigen-value-and-vecotr">Eigen Value and Vecotr<a class="headerlink" href="#eigen-value-and-vecotr" title="Permanent link">⚓︎</a></h1>
-<p>Definition :
-Consider a square matrix <span class="arithmatex">\(A=[a_{ij}]_{n{\times}n}\)</span> and a nonzero vector <span class="arithmatex">\(v\)</span> of length <span class="arithmatex">\(n\)</span> Then there exit a scalar <span class="arithmatex">\(\lambda \in R\)</span> such that <span class="arithmatex">\(Av = \lambda v\)</span> 
-.
-Where <span class="arithmatex">\(v\)</span> is called eigenvector corresponding to eigenvalue <span class="arithmatex">\(\lambda\)</span> of matrix <span class="arithmatex">\(A\)</span>.</p>
-<p>Remark : 
-1. Linear transformation <span class="arithmatex">\(T : R^n \to R^n\)</span> is equivalent to the square matrix <span class="arithmatex">\(A\)</span> of order <span class="arithmatex">\(n \times n\)</span>. thus given a basis set of the vector space can be defined as set of eigen vectors of matrix <span class="arithmatex">\(A\)</span> for linear transformation <span class="arithmatex">\(T\)</span>.</p>
-<ol>
-<li>Eigenvectors and eigenvalues exits in a wide range of applications  like stability and vibration analysis of dynamical systems, atomic orbits, facial recognition and matrix diagonalization.</li>
-</ol>
-<h2 id="faddeev-leverrier-algorithm">Faddeev-LeVerrier Algorithm<a class="headerlink" href="#faddeev-leverrier-algorithm" title="Permanent link">⚓︎</a></h2>
-<p>Faddeev-LeVerrier algorithm is a recursive method to calculate the coefficients of the characteristic polynomial 
-<span class="arithmatex">\(p_A(\lambda)=\det (\lambda I_n - A)\)</span>
- of a square matrix, A. solving characteristic polynomial gives eigen values of matrix A as a roots of it and matrix polynomial of matrix A  vanishes i.e p(A) = 0 by Cayley-Hamilton Theorem. Faddeev-Le Verrier algorithm works directly with coefficients of matrix <span class="arithmatex">\(A\)</span>.</p>
-<p>Problem : Given a </p>
+  <h1>Keras</h1>
+
+
 
 
 
@@ -933,7 +854,7 @@ Where <span class="arithmatex">\(v\)</span> is called eigenvector corresponding 
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+          <a href="../../fastapi/fast/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Fast">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -943,20 +864,20 @@ Where <span class="arithmatex">\(v\)</span> is called eigenvector corresponding 
                 Previous
               </span>
               <div class="md-ellipsis">
-                Home
+                Fast
               </div>
             </div>
           </a>
         
         
           
-          <a href="../Linear_Transformations/" class="md-footer__link md-footer__link--next" aria-label="Next: Linear Transformations">
+          <a href="../../tensorflow/tensor/" class="md-footer__link md-footer__link--next" aria-label="Next: Tensor">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Linear Transformations
+                Tensor
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1022,12 +943,12 @@ Where <span class="arithmatex">\(v\)</span> is called eigenvector corresponding 
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.56ea9cef.min.js"></script>
       
-        <script src="../../javascripts/mathjax.js"></script>
+        <script src="../../../javascripts/mathjax.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       

@@ -69,3 +69,8 @@ nav:
     - notebook/lab-prompting.md
     - notebook/lab-peft-from-scratch.md
     - notebook/lab-Scipy-Optimize.md
+  - Frameworks:
+    - frameworks/pytorch/ch1pytorchIntro.md
+    - frameworks/fastapi/fast.md
+    - frameworks/keras/keras.md
+    - frameworks/tensorflow/tensor.md
